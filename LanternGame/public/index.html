@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!--BOOTSTRAP -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!--GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600" rel="stylesheet">
+  
+  <title>LanternGame</title>
+</head>
+
+
+
+<!--RIOT TAG -->
+<backgrounds></backgrounds>
+
+<!--FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyANsmpbnKkzdZdPMeT5Ge30zifjT-nNQ6k",
+    authDomain: "lanterngame-5387f.firebaseapp.com",
+    databaseURL: "https://lanterngame-5387f.firebaseio.com",
+    storageBucket: "lanterngame-5387f.appspot.com",
+    messagingSenderId: "473213191529"
+  };
+  firebase.initializeApp(config);
+</script>
+
+
+<!--RIOT TAG SCRIPTS -->
+<script src="tags/backgrounds.tag" type="riot/tag"></script>
+<script src="tags/user-profile.tag" type="riot/tag"></script>
+<script src="tags/lantern.tag" type="riot/tag"></script>
+
+<script src="https://cdn.jsdelivr.net/riot/3.1/riot+compiler.js">
+</script>
+
+<script>
+  riot.mount('*');
+</script>
+
+
+<body>
+
+</body>
+</html>
