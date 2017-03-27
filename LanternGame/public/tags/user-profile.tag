@@ -1,5 +1,7 @@
 <user-profile>
 
+<!-- SECTION profileHome -->
+<div id="profileHome">
   <div class="userProfileSection">
     <img src={ userProfileData.picture }/>
     <h2>{ userProfileData.name }</h2>
@@ -9,30 +11,115 @@
 
 <div class="lanternListSection">
   <h4>Lanterns</h4>
-  <p class="notes" >NOTE, HI! HI! currently the imput send value to the firebase. Works only with KEY 13 enter, not with the button</p>
+  <p class="notes" >NOTE!!!!!!!, HI! HI! currently the imput send value to the firebase. Works only with KEY 13 enter, not with the button</p>
   <hr class="line2">
 
-  <!--TAG LANTERN HERE-->
+  <!--TAG lantern here-->
   <lantern each={ lanternListData }></lantern>
+  <button class="basic" type="button" name="createLanternButton" onclick={ createLantern }>Create a new lantern</button>
 
+</div>
+</div>
+
+<!-- SECTION create Lanterns  -->
+<div id="setGoal" class="hide">
+  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
+  <p>Let's start lighting the way to achieve your goal.</p>
+  <img src="http://placehold.it/100x100" alt="Placeholder for lantern image">
+  <p>What is your goal?</p>
+  <input ref="goal" class="lanternInput" class="input" type="text" placeholder="Enter Goal" onkeypress={ addLantern }>
+  <button type="button" name="button" onclick={ goToSetDeadline }>next</button>
 </div>
 
 
-<div class="createLanternForm"> <!--This eventually will be a separete form with many questions-->
-  <input type="text" placeholder="Enter Goal" onkeypress={ addLantern }>
-  <button class="basic" type="button" name="newLanternButton" onclick={ addLantern }>Create a new lantern</button>
+<div id="setDeadline" class="hide">
+  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
+  <p>Congratualations for your lanterns! Let's set a deadline for it.</p>
+  <img src="http://placehold.it/100x100" alt="Placeholder for lantern image">
+  <p>When do you want this goal to come true?</p>
+  <input ref="deadline" class="lanternDateInput" type="date" name="deadline" value="yyyy-MM-dd">
+  <button type="button" name="back" onclick={ backToSetGoal }>back</button>
+  <button type="button" name="next" onclick={ goToSetSteps }>next</button>
 </div>
 
+
+<div id="setSteps" class="hide">
+  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
+  <p>One small steps at a time. Let's break it out!</p>
+  <p>What small concrete steps do you want to make this goal come true?</p>
+  <div>
+    <p>Steps</p>
+    <!-- step-input tags -->
+    <ol>
+      <li>
+        <input ref="step1" class="lanternInput" type="text" placeholder="What is the first step?">
+      </li>
+      <li>
+        <input class="lanternInput" type="text" placeholder="Next step">
+      </li>
+      <li>
+        <input class="lanternInput" type="text" placeholder="Next step">
+      </li>
+      <li>
+        <input class="lanternInput" type="text" placeholder="Next step">
+      </li>
+    </ol>
+    <img type="button" src="http://placehold.it/30x30" alt="Plus another task">
+  </div>
+  <button type="button" name="back" onclick={ backToSetDeadline }>back</button>
+  <button type="button" name="button" onclick={ completeLantern }>Complete my Lantern!</button>
+</div>
+
+</div>
 
 
 
   <script>
+
+    var that = this;
+
     console.log("test");
 
     this.userProfileData = {
       name: "Fiore",
       picture: "http://placehold.it/50x50"
     };
+
+    this.createLantern = function() {
+      document.querySelector('#profileHome').classList.add('hide');
+      document.querySelector('#setGoal').classList.remove('hide');
+    }
+
+    this.goToSetDeadline = function() {
+      document.querySelector('#setGoal').classList.add('hide');
+      document.querySelector('#setDeadline').classList.remove('hide');
+    }
+
+    this.goToSetSteps = function() {
+      document.querySelector('#setDeadline').classList.add('hide');
+      document.querySelector('#setSteps').classList.remove('hide');
+    }
+
+    this.backToSetGoal = function() {
+      document.querySelector('#setGoal').classList.remove('hide');
+      document.querySelector('#setDeadline').classList.add('hide');
+    }
+
+    this.backToSetDeadline = function() {
+      document.querySelector('#setDeadline').classList.remove('hide');
+      document.querySelector('#setSteps').classList.add('hide');
+    }
+
+    this.cancelCreateLantern = function(){
+      document.querySelector('#profileHome').classList.remove('hide');
+      document.querySelector('#setGoal').classList.add('hide');
+      document.querySelector('#setDeadline').classList.add('hide');
+      document.querySelector('#setSteps').classList.add('hide');
+      document.querySelector('.lanternInput').value = "";
+      document.querySelector('.lanternDateInput').value = "yyyy-MM-dd";
+    }
+
+    // database.ref(). = userProfileData
 
     this.lanternListData = [];
 
@@ -50,25 +137,31 @@
 
 
 
-
-
-  addLantern(event){
+  completeLantern(){
     var newLantern = {};
-    if (event.which === 13){
-      newLantern.goal = event.target.value; //grab the user goal value
+    var stepList = {
+      task: "step 1",
+      done: false
+    };
+      newLantern.goal = that.refs.goal.value; //grab the user goal value
       newLantern.done = false;
+      newLantern.deadline = that.refs.deadline.value;
+      // newLantern.steps = that.stepList.task.value;
+
+      // newLantern.steps = that.stepList;
+      // newLantern.step.step1 = that.refs.step1.value;
+      // console.log(newLantern);
+      // newLantern.done = false;
     //  this.lanternListData.push(newLantern); //pushes newLantern to the LanternListData list (we change this to push to the data base instead of the data list above)
 
-
     var database = firebase.database() //shortcut to the firebase
-    var xRef = database.ref('LanternList');
-    var newKey = xRef.push().key;
-    xRef.child(newKey).set(newLantern);
+    var lanternListRef = database.ref('LanternList');
+    var newKey = lanternListRef.push().key;
+    lanternListRef.child(newKey).set(newLantern);
     //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
 
-      event.target.value = ""; //reset input value
-      event.target.focus(); //focus back on input
-    }
+      // event.target.value = ""; //reset input value
+      // event.target.focus(); //focus back on input
   }
 
   </script>
@@ -76,6 +169,14 @@
 
 
   <style>
+
+    p {
+      color: #C9C9C9;
+    }
+
+    ol {
+      color: #C9C9C9;
+    }
 
     h2 {
       font-family: work sans;
@@ -121,6 +222,9 @@
       padding-right: 10px;
     }
 
+    .hide {
+      display: none;
+    }
 
 
     /*COLORS:

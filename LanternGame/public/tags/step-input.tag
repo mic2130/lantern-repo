@@ -1,31 +1,19 @@
-<backgrounds>
-
-     <img class="bg" src="img/bg.jpg" alt="background">
+<step-input>
 
 
 
-     <div id="nonmargin" class="container">
-       <div class="row">
-         <div class="col-md-5">
-           <div id="sidebar">
-               <!--TAG USER PROFILE HERE-->
-              <user-profile></user-profile>
 
-           </div>
-         </div>
-       </div>
-     </div>
+
 
   <script>
-    console.log("test");
 
   </script>
 
   <style>
 
-body {
+  body {
 
-}
+  }
 
 
 
@@ -52,14 +40,14 @@ body {
   }
 
 
-/*need a better solution for the 100% height side bar*/
-#nonmargin {
+  /*need a better solution for the 100% height side bar*/
+  #nonmargin {
   margin: 0;
   padding-left: 0;
-}
+  }
 
-/*need a better solution for the 100% height side bar*/
-#sidebar {
+  /*need a better solution for the 100% height side bar*/
+  #sidebar {
   position: relative;
   background: #242D39;
   margin-top: 0;
@@ -68,9 +56,10 @@ body {
   margin-bottom: -101%;
   padding-bottom: 300%;
   box-shadow: 0 0 20px black;
-}
+  }
 
 
   </style>
 
-</backgrounds>
+
+</step-input>
