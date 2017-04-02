@@ -1,6 +1,5 @@
 <user-profile>
 
-<!-- SECTION profileHome -->
 <div id="profileHome">
   <div class="userProfileSection">
     <img src={ userProfileData.picture }/>
@@ -15,7 +14,7 @@
   <hr class="line2">
 
   <!--TAG lantern here-->
-  <lantern each={ lanternListData }></lantern>
+  <lantern each={ lanternListData }></lantern> <!-- change to create with firebase data -->
   <button class="basic" type="button" name="createLanternButton" onclick={ createLantern }>Create a new lantern</button>
 
 </div>
@@ -50,21 +49,12 @@
   <div>
     <p>Steps</p>
     <!-- step-input tags -->
-    <ol>
-      <li>
-        <input ref="step1" class="lanternInput" type="text" placeholder="What is the first step?">
-      </li>
-      <li>
-        <input class="lanternInput" type="text" placeholder="Next step">
-      </li>
-      <li>
-        <input class="lanternInput" type="text" placeholder="Next step">
-      </li>
-      <li>
-        <input class="lanternInput" type="text" placeholder="Next step">
-      </li>
-    </ol>
-    <img type="button" src="http://placehold.it/30x30" alt="Plus another task">
+    <step-input1></step-input1>
+    <div ref="stepdiv">
+
+    </div>
+    <!-- button that creates step-input tags -->
+    <img type="button" src="http://placehold.it/30x30" alt="Plus another task" onclick={ makeStep }>
   </div>
   <button type="button" name="back" onclick={ backToSetDeadline }>back</button>
   <button type="button" name="button" onclick={ completeLantern }>Complete my Lantern!</button>
@@ -77,6 +67,13 @@
   <script>
 
     var that = this;
+
+    makeStep = function() {
+      that.refs.stepdiv.innerHTML = "<step-input2></step-input2>";
+      console.log("done");
+      riot.mount("step-input2");
+      that.update();
+    };
 
     console.log("test");
 
@@ -122,6 +119,7 @@
     // database.ref(). = userProfileData
 
     this.lanternListData = [];
+    this.stepList = [];
 
   //   this.lanternListData = [{
   //     goal: "Learn to code",
@@ -135,7 +133,10 @@
   //   }
   // ];
 
-  var stepList = [];
+  // var stepList = [
+  //   { data of step 1 }
+  //   {step 2 }
+  // ];
 
   completeLantern(){
     var newLantern = {};
