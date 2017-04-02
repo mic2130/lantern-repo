@@ -135,14 +135,10 @@
   //   }
   // ];
 
-
+  var stepList = [];
 
   completeLantern(){
     var newLantern = {};
-    var stepList = {
-      task: "step 1",
-      done: false
-    };
       newLantern.goal = that.refs.goal.value; //grab the user goal value
       newLantern.done = false;
       newLantern.deadline = that.refs.deadline.value;

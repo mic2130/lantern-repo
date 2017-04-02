@@ -1,11 +1,15 @@
 <step-input>
 
-
+  <input type="" name="" value="">
 
 
 
 
   <script>
+    this.data = null;
+    makeData = function() {
+      this.data = {}
+    }
 
   </script>
 
