@@ -1,14 +1,28 @@
-<step-input>
+<step-input1>
 
-  <input type="" name="" value="">
-
-
+  <input ref="stepInput" placeholder="Step" onkeypress={ makeData}>
+  <!-- <input ref="stepDeadline" type="date" value="yyyy-MM-dd"> -->
 
 
   <script>
-    this.data = null;
-    makeData = function() {
-      this.data = {}
+
+    var that = this;
+
+    makeData(event) {
+      if (event.which === 13) {
+        var data = {
+        step: this.refs.stepInput.value,
+        done: false
+        };
+      // if (event.which === 13) {
+      //   data.step = event.target.value;
+      //   data.done = false;
+      // that.stepDeadline = that.refs.stepDeadline.value;
+      this.parent.stepList.push(data);
+      this.parent.update();
+      console.log(data);
+      console.log(parent.stepList);
+      }
     }
 
   </script>
@@ -66,4 +80,4 @@
   </style>
 
 
-</step-input>
+</step-input1>
