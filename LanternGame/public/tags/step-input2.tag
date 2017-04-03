@@ -1,17 +1,22 @@
 <step-input2>
 
-  <p>hello</p>
-  <input type="" name="" placeholder="Step">
+  <input ref="stepInput" placeholder="Step" onkeypress={ makeData}>
+  <br>
 
 
   <script>
-    this.data = null;
+    var that = this;
 
-    // makeData = function() {
-    //   this.data = {}; --> step 1
-    //   task = ref.value;
-    //   done = false;
-    // }
+    makeData(event) {
+      if (event.which === 13) {
+        var data = {
+        step: this.refs.stepInput.value,
+        done: false,
+        };
+      this.parent.stepList.push(data);
+      this.parent.update();
+      }
+    }
 
   </script>
 

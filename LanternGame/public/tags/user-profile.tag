@@ -50,11 +50,9 @@
     <p>Steps</p>
     <!-- step-input tags -->
     <step-input1></step-input1>
-    <div ref="stepdiv">
-
-    </div>
+      <step-input2 each={ stepObjects }></step-input2>
     <!-- button that creates step-input tags -->
-    <img type="button" src="http://placehold.it/30x30" alt="Plus another task" onclick={ makeStep }>
+    <img type="button" src="http://placehold.it/30x30" alt="Plus another task" onclick={ makeStepObject }>
   </div>
   <button type="button" name="back" onclick={ backToSetDeadline }>back</button>
   <button type="button" name="button" onclick={ completeLantern }>Complete my Lantern!</button>
@@ -68,11 +66,13 @@
 
     var that = this;
 
-    makeStep = function() {
-      that.refs.stepdiv.innerHTML = "<step-input2></step-input2>";
-      console.log("done");
-      riot.mount("step-input2");
-      that.update();
+    // `this.steps = [{...},{...},{...}];` // Start with three step objects. Each time the button is pushed, create a `stepObject` and `push()` it to the `this.steps` array. Your template will use the `each` special attribute.  `<step-input each={ steps }></step-input>`.
+
+    this.stepObjects = [{}, {}];
+
+    makeStepObject = function() {
+      var x = {};
+      that.stepObjects.push(x);
     };
 
     console.log("test");
@@ -143,6 +143,8 @@
       newLantern.goal = that.refs.goal.value; //grab the user goal value
       newLantern.done = false;
       newLantern.deadline = that.refs.deadline.value;
+      newLantern.steps = that.stepList;
+      console.log(newLantern);
       // newLantern.steps = that.stepList.task.value;
 
       // newLantern.steps = that.stepList;
