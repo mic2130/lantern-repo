@@ -2,6 +2,7 @@
 
   <input ref="stepInput" placeholder="Step" onkeypress={ makeData}>
   <!-- <input ref="stepDeadline" type="date" value="yyyy-MM-dd"> -->
+  <br>
 
 
   <script>
@@ -12,16 +13,11 @@
       if (event.which === 13) {
         var data = {
         step: this.refs.stepInput.value,
-        done: false
+        done: false,
+        // deadline: this.refs.stepDeadline.value
         };
-      // if (event.which === 13) {
-      //   data.step = event.target.value;
-      //   data.done = false;
-      // that.stepDeadline = that.refs.stepDeadline.value;
       this.parent.stepList.push(data);
       this.parent.update();
-      console.log(data);
-      console.log(parent.stepList);
       }
     }
 
