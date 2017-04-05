@@ -49,7 +49,7 @@
   <div>
     <p>Steps</p>
     <!-- step-input tags -->
-    <step-input1></step-input1>
+    <!-- <step-input1></step-input1> -->
       <step-input2 each={ stepObjects }></step-input2>
     <!-- button that creates step-input tags -->
     <img type="button" src="http://placehold.it/30x30" alt="Plus another task" onclick={ makeStepObject }>
@@ -68,7 +68,7 @@
 
     // `this.steps = [{...},{...},{...}];` // Start with three step objects. Each time the button is pushed, create a `stepObject` and `push()` it to the `this.steps` array. Your template will use the `each` special attribute.  `<step-input each={ steps }></step-input>`.
 
-    this.stepObjects = [{}, {}];
+    this.stepObjects = [{}, {}, {}];
 
     makeStepObject = function() {
       var x = {};
@@ -114,6 +114,7 @@
       document.querySelector('#setSteps').classList.add('hide');
       document.querySelector('.lanternInput').value = "";
       document.querySelector('.lanternDateInput').value = "yyyy-MM-dd";
+      that.stepObjects = [{},{}, {}];
     }
 
     // database.ref(). = userProfileData
@@ -145,18 +146,11 @@
       newLantern.deadline = that.refs.deadline.value;
       newLantern.steps = that.stepList;
       console.log(newLantern);
-      // newLantern.steps = that.stepList.task.value;
 
-      // newLantern.steps = that.stepList;
-      // newLantern.step.step1 = that.refs.step1.value;
-      // console.log(newLantern);
-      // newLantern.done = false;
-    //  this.lanternListData.push(newLantern); //pushes newLantern to the LanternListData list (we change this to push to the data base instead of the data list above)
-
-    var database = firebase.database() //shortcut to the firebase
-    var lanternListRef = database.ref('LanternList');
-    var newKey = lanternListRef.push().key;
-    lanternListRef.child(newKey).set(newLantern);
+      var database = firebase.database() //shortcut to the firebase
+      var lanternListRef = database.ref('LanternList');
+      var newKey = lanternListRef.push().key;
+      lanternListRef.child(newKey).set(newLantern);
     //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
 
       // event.target.value = ""; //reset input value
