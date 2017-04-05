@@ -21,6 +21,8 @@
 </div>
 
 <!-- SECTION create Lanterns  -->
+
+<!-- GOAL -->
 <div id="setGoal" class="hide">
   <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
   <p>Let's start lighting the way to achieve your goal.</p>
@@ -30,7 +32,7 @@
   <button type="button" name="button" onclick={ goToSetDeadline }>next</button>
 </div>
 
-
+<!-- DEADLINE -->
 <div id="setDeadline" class="hide">
   <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
   <p>Congratualations for your lanterns! Let's set a deadline for it.</p>
@@ -41,7 +43,7 @@
   <button type="button" name="next" onclick={ goToSetSteps }>next</button>
 </div>
 
-
+<!-- STEPS -->
 <div id="setSteps" class="hide">
   <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
   <p>One small steps at a time. Let's break it out!</p>
@@ -50,7 +52,7 @@
     <p>Steps</p>
     <!-- step-input tags -->
     <!-- <step-input1></step-input1> -->
-      <step-input2 each={ stepObjects }></step-input2>
+      <step-input2 each={ stepObjects } opts={ data }></step-input2>
     <!-- button that creates step-input tags -->
     <img type="button" src="http://placehold.it/30x30" alt="Plus another task" onclick={ makeStepObject }>
   </div>
@@ -140,6 +142,8 @@
   // ];
 
   completeLantern(){
+    // that.stepList.push(that.opts.data);
+    // that.update();
     var newLantern = {};
       newLantern.goal = that.refs.goal.value; //grab the user goal value
       newLantern.done = false;
