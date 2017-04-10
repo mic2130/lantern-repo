@@ -65,17 +65,24 @@
 
 
   <script>
-
+    console.log('x', this);
     var that = this;
 
     // `this.steps = [{...},{...},{...}];` // Start with three step objects. Each time the button is pushed, create a `stepObject` and `push()` it to the `this.steps` array. Your template will use the `each` special attribute.  `<step-input each={ steps }></step-input>`.
 
-    this.stepObjects = [{}, {}, {}];
+    this.stepObjects = [
+      {done:false, order:1, step:""},
+      {done:false, order:2, step:""},
+      {done:false, order:3, step:""}
+    ];
 
     makeStepObject = function() {
-      var x = {};
+      var x = {done:false, order: that.stepObjects.length + 1, step:""};
+
       that.stepObjects.push(x);
     };
+
+
 
     console.log("test");
 
@@ -116,7 +123,7 @@
       document.querySelector('#setSteps').classList.add('hide');
       document.querySelector('.lanternInput').value = "";
       document.querySelector('.lanternDateInput').value = "yyyy-MM-dd";
-      that.stepObjects = [{},{}, {}];
+      that.stepObjects = [{},{},{}];
     }
 
     // database.ref(). = userProfileData
@@ -148,7 +155,7 @@
       newLantern.goal = that.refs.goal.value; //grab the user goal value
       newLantern.done = false;
       newLantern.deadline = that.refs.deadline.value;
-      newLantern.steps = that.stepList;
+      newLantern.steps = that.stepObjects;
       console.log(newLantern);
 
       var database = firebase.database() //shortcut to the firebase
