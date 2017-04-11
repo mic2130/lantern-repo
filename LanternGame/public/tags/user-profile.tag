@@ -10,12 +10,13 @@
 
 <div class="lanternListSection">
   <h4>Lanterns</h4>
-  <p class="notes" >NOTE!!!!!!!, HI! HI! currently the imput send value to the firebase. Works only with KEY 13 enter, not with the button</p>
   <hr class="line2">
 
   <!--TAG lantern here-->
-  <lantern each={ lanternListData }></lantern> <!-- change to create with firebase data -->
+  <lantern each={ lanternList }></lantern>
   <button class="basic" type="button" name="createLanternButton" onclick={ createLantern }>Create a new lantern</button>
+  <div>
+  </div>
 
 </div>
 </div>
@@ -51,12 +52,21 @@
   <div>
     <p>Steps</p>
     <!-- step-input tags -->
-    <!-- <step-input1></step-input1> -->
-      <step-input2 each={ stepObjects } opts={ data }></step-input2>
+      <step-input each={ stepObjects } opts={ data }></step-input>
     <!-- button that creates step-input tags -->
     <img type="button" src="http://placehold.it/30x30" alt="Plus another task" onclick={ makeStepObject }>
   </div>
   <button type="button" name="back" onclick={ backToSetDeadline }>back</button>
+  <button type="button" name="next" onclick={ goToSetFirstDeadline }>next</button>
+</div>
+
+<div id="setFirstDeadline" class="hide">
+  <h2>When do you want to complete your first step by?</h2>
+  <h3>Your first step:</h3>
+  <p>{ firstStep }</p>
+  <input ref="firstStepDeadline" class="firstStepDeadlineInput" type="date" name="deadline" value="yyyy-MM-dd">
+  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
+  <button type="button" name="back" onclick={ backToSetSteps }>back</button>
   <button type="button" name="button" onclick={ completeLantern }>Complete my Lantern!</button>
 </div>
 
@@ -78,7 +88,6 @@
 
     makeStepObject = function() {
       var x = {done:false, order: that.stepObjects.length + 1, step:""};
-
       that.stepObjects.push(x);
     };
 
@@ -106,6 +115,14 @@
       document.querySelector('#setSteps').classList.remove('hide');
     }
 
+    var firstStep;
+
+    this.goToSetFirstDeadline = function() {
+      document.querySelector('#setSteps').classList.add('hide');
+      document.querySelector('#setFirstDeadline').classList.remove('hide');
+      that.firstStep = that.stepObjects[0].step;
+    }
+
     this.backToSetGoal = function() {
       document.querySelector('#setGoal').classList.remove('hide');
       document.querySelector('#setDeadline').classList.add('hide');
@@ -116,13 +133,20 @@
       document.querySelector('#setSteps').classList.add('hide');
     }
 
+    this.backToSetSteps = function() {
+      document.querySelector('#setSteps').classList.remove('hide');
+      document.querySelector('#setFirstDeadline').classList.add('hide');
+    }
+
     this.cancelCreateLantern = function(){
       document.querySelector('#profileHome').classList.remove('hide');
       document.querySelector('#setGoal').classList.add('hide');
       document.querySelector('#setDeadline').classList.add('hide');
       document.querySelector('#setSteps').classList.add('hide');
+      document.querySelector('#setFirstDeadline').classList.add('hide');
       document.querySelector('.lanternInput').value = "";
       document.querySelector('.lanternDateInput').value = "yyyy-MM-dd";
+      document.querySelector('.firstStepDeadlineInput').value = "yyyy-MM-dd";
       that.stepObjects = [{},{},{}];
     }
 
@@ -130,23 +154,14 @@
 
     this.lanternListData = [];
     this.stepList = [];
+    this.lanternList = [];
 
-  //   this.lanternListData = [{
-  //     goal: "Learn to code",
-  //     done: true //true = the user finished / false = the user is working
-  //   },{
-  //     goal: "Make a portfolio",
-  //     done: false
-  //   },{
-  //     goal: "Become a healthy person",
-  //     done: true
-  //   }
-  // ];
 
-  // var stepList = [
-  //   { data of step 1 }
-  //   {step 2 }
-  // ];
+// IN CASE WE WANT TO SAVE STEPS BEFORE SAVING LANTERN
+    // saveSteps() {
+    //   ref('lantern/-key/steps').set(stepObjects);
+    // }
+
 
   completeLantern(){
     // that.stepList.push(that.opts.data);
@@ -156,17 +171,24 @@
       newLantern.done = false;
       newLantern.deadline = that.refs.deadline.value;
       newLantern.steps = that.stepObjects;
+      newLantern.nextStep = that.refs.firstStepDeadline.value;
       console.log(newLantern);
 
       var database = firebase.database() //shortcut to the firebase
       var lanternListRef = database.ref('LanternList');
       var newKey = lanternListRef.push().key;
+      newLantern.id = this.newKey;
       lanternListRef.child(newKey).set(newLantern);
+      that.lanternList.push(newLantern);
     //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
 
-      // event.target.value = ""; //reset input value
-      // event.target.focus(); //focus back on input
+      document.querySelector('#profileHome').classList.remove('hide');
+      document.querySelector('#setFirstDeadline').classList.add('hide');
+
+
   }
+
+  // Object.values(x) <-- throw in the object
 
   </script>
 
@@ -185,6 +207,12 @@
     h2 {
       font-family: work sans;
       font-weight: 500;
+      color: #C9C9C9;
+    }
+
+    h3 {
+      font-family: work sans;
+      font-weight: 450;
       color: #C9C9C9;
     }
 

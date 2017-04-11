@@ -1,4 +1,4 @@
-<step-input2>
+<step-input>
 
   <input ref="stepInput" placeholder="Step" onchange={ makeData }>
   <br>
@@ -15,6 +15,7 @@
       console.log(event.item);
       event.item.step = this.refs.stepInput.value;
       console.log(this.parent.stepObjects);
+      // that.parent.saveSteps();
     }
 
     // makeData(event) {
@@ -84,4 +85,4 @@
   </style>
 
 
-</step-input2>
+</step-input>

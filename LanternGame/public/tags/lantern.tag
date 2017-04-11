@@ -1,15 +1,19 @@
 <lantern>
 
-<div class="lanternItem">
+<div>
 
-<p>
-  <img class="lanternIcon" src="img/lanternicon.png" alt="lantern icon"> { goal } <!--prints each goal on lanternListData / user-profile.tag -->
-  <img class="stateIcon" src="img/notdone.png" alt="state icon">
-  <hr class="line2">
-</p>
+  <!-- <img class="lanternIcon" src="img/lanternicon.png" alt="lantern icon">   -->
+  <!-- <img class="stateIcon" src="img/notdone.png" alt="state icon"> -->
+  <!-- <hr class="line2"> -->
+  <p>{ item.goal }</p>
 
 
 </div>
+
+<div class="hide">
+
+</div>
+
 
   <script>
     console.log("test");
@@ -67,6 +71,10 @@
       width: 28px;
       position: absolute;
       right: 30px;
+    }
+
+    .hide {
+      display: none;
     }
 
 /*COLORS:
