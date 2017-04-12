@@ -1,76 +1,55 @@
 <home>
 
-     <img class="bg" src="img/bg.jpg" alt="background">
+    <sidebar></sidebar>
+
+    <div class="alllanterns" >
+      <img class="lantern" src="../img/lanternicon.png" style="position: absolute; left:{leftVal}%; bottom:{ bottomVal }%; transition: bottom 1s" >
+      <button type="button" name="button" onclick={ flyLantern } style="position:absolute; left:90%">Complete a Task</button>
+    </div>
+
+    <script>
+        var that = this;
+        console.log("test home");
+        this.leftVal = Math.floor(Math.random() * 50 + 40);;
+        this.bottomVal = 15;
+        this.tasks = [{},{},{},{},{}];
+
+        flyLantern(){
+          console.log(this.tasks.length);
+          this.eachDistance = 85 / this.tasks.length;
+          this.bottomVal = this.bottomVal + this.eachDistance
+          if (this.bottomVal > 90) {
+            this.bottomVal = 90;
+          }
+        }
+
+    </script>
+
+    <style>
+
+        .alllanterns {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 0;
+            background: url("../img/bg.jpg");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        sidebar {
+            height: 100%;
+            position: fixed;
+            top:0;
+            left:0;
+            z-index: 999;
+        }
 
 
-
-     <div id="nonmargin" class="container">
-       <div class="row">
-         <div class="col-md-5">
-           <div id="sidebar">
-               <!--TAG USER PROFILE HERE-->
-              <user-profile></user-profile>
-
-           </div>
-         </div>
-       </div>
-     </div>
-
-  <script>
-    console.log("test");
-
-  </script>
-
-  <style>
-
-body {
-
-}
-
-
-
-  img.bg {
-    /* Set rules to fill background */
-    min-height: 100%;
-    min-width: 1024px;
-
-    /* Set up proportionate scaling */
-    width: 100%;
-    height: auto;
-
-    /* Set up positioning */
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-
-  @media screen and (max-width: 1024px) { /* Specific to this particular image */
-    img.bg {
-      left: 50%;
-      margin-left: -512px;   /* 50% */
-    }
-  }
-
-
-/*need a better solution for the 100% height side bar*/
-#nonmargin {
-  margin: 0;
-  padding-left: 0;
-}
-
-/*need a better solution for the 100% height side bar*/
-#sidebar {
-  position: relative;
-  background: #242D39;
-  margin-top: 0;
-  padding: 30px;
-  min-height: 100%;
-  margin-bottom: -101%;
-  padding-bottom: 300%;
-  box-shadow: 0 0 20px black;
-}
-
-
-  </style>
+    </style>
 
 </home>
