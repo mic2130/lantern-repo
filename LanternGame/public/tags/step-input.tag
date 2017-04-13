@@ -18,18 +18,6 @@
       // that.parent.saveSteps();
     }
 
-    // makeData(event) {
-    //   console.log(event.item);
-    //   // if (event.which === 13) {
-    //   var data = {
-    //     step: this.refs.stepInput.value,
-    //     done: false
-    //   };
-    //   this.parent.makeStepObject(data);
-    //   this.parent.update();
-    //   // }
-    // }
-
   </script>
 
   <style>
