@@ -177,16 +177,23 @@
       var database = firebase.database() //shortcut to the firebase
       var lanternListRef = database.ref('LanternList');
       var newKey = lanternListRef.push().key;
-      newLantern.id = this.newKey;
+      // newLantern.id = this.newKey;
       lanternListRef.child(newKey).set(newLantern);
-      that.lanternList.push(newLantern);
     //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
 
       document.querySelector('#profileHome').classList.remove('hide');
       document.querySelector('#setFirstDeadline').classList.add('hide');
-
-
   }
+
+  var database = firebase.database();
+  var lanternListRef = database.ref('LanternList');
+
+  lanternListRef.on('child_added', function(snapshot) {
+    var data = snapshot.val();
+    that.lanternList.push(data);
+    console.log('lanternList array' + that.lanternList);
+    that.update();
+  });
 
   // Object.values(x) <-- throw in the object
 

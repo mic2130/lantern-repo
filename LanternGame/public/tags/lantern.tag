@@ -4,8 +4,10 @@
 
   <!-- <img class="lanternIcon" src="img/lanternicon.png" alt="lantern icon">   -->
   <!-- <img class="stateIcon" src="img/notdone.png" alt="state icon"> -->
-  <!-- <hr class="line2"> -->
-  <p>{ item.goal }</p>
+
+  <p><strong>Goal:</strong> { goal }</p>
+  <p><strong>Deadline:</strong> { deadline }</p>
+  <hr class="line2">
 
 
 </div>
@@ -16,7 +18,9 @@
 
 
   <script>
-    console.log("test");
+    console.log('this', this);
+    // var goal = this.parent.lanternList;
+
 
 
   </script>
@@ -42,6 +46,7 @@
       font-weight: 300;
       color: #C9C9C9;
       letter-spacing: 0.5px;
+      font-size: 18px;
     }
 
     hr.line1 {
