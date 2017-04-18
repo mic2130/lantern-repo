@@ -1,6 +1,5 @@
 <home>
 
-    <sidebar></sidebar>
 
     <div class="alllanterns" >
       <div class="lantern" style="position: absolute; left:{leftVal}%; bottom:{ bottomVal }%; transition: bottom 1s">
@@ -20,13 +19,21 @@
         this.bottomVal = 15;
         this.tasks = [{},{},{},{},{}];
 
+        this.donePercent = 0;
+        this.donePercent = numDone / this.tasks.length;
+
+        this.lanternSteps = [];
+        var database = firebase.database();
+        this.lanterListSteps = database.ref(LanternList/key/steps);
+
         flyLantern(){
           console.log(this.tasks.length);
-          this.eachDistance = 70 / this.tasks.length;
-          this.bottomVal = this.bottomVal + this.eachDistance
-          if (this.bottomVal > 85) {
-            this.bottomVal = 85;
-          }
+
+          // this.eachDistance = 70 / this.tasks.length;
+          // this.bottomVal = this.bottomVal + this.eachDistance
+          // if (this.bottomVal > 85) {
+          //   this.bottomVal = 85;
+          // }
         }
 
     </script>
