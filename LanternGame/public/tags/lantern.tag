@@ -1,22 +1,48 @@
 <lantern>
 
-<div class="lanternItem">
 
-<p>
-  <img class="lanternIcon" src="img/lanternicon.png" alt="lantern icon"> { goal } <!--prints each goal on lanternListData / user-profile.tag -->
-  <img class="stateIcon" src="img/notdone.png" alt="state icon">
+<div ref="preview">
+  <img class="lanternIcon" src="img/lanternicon.png" alt="lantern icon">
+  <!-- <img class="stateIcon" src="img/notdone.png" alt="state icon" onclick={ showDetails }> -->
+  <span id="plus" class="glyphicon glyphicon-plus" style="color: blue;" onclick={ showDetails }></span>
+  <span id="minus" class="glyphicon glyphicon-minus hide" style="color: blue;" onclick={ hideDetails }></span>
+  <p onclick={ showDetails }><strong>Goal:</strong> { goal }</p>
+  <p onclick={ showDetails }><strong>Deadline:</strong> { deadline }</p>
+
+  <div id="details" class="hide">
+    <!-- <p>{ steps[0].step }</p> -->
+    <p><strong>Steps:</strong></p>
+    <step each={ steps }></step>
+  </div>
+
   <hr class="line2">
-</p>
-
-
 </div>
 
+
   <script>
-    console.log("test");
+    console.log('this', this);
+    // var goal = this.parent.lanternList;
+
+    this.toggle = function() {
+
+    }
+
+    this.showDetails = function() {
+      document.querySelector('#details').classList.remove('hide');
+      document.querySelector('#plus').classList.add('hide');
+      document.querySelector('#minus').classList.remove('hide');
+    }
+
+    this.hideDetails = function() {
+      document.querySelector('#details').classList.add('hide');
+      document.querySelector('#plus').classList.remove('hide');
+      document.querySelector('#minus').classList.add('hide');
+    }
+
+
 
 
   </script>
-
 
 
   <style>
@@ -38,6 +64,7 @@
       font-weight: 300;
       color: #C9C9C9;
       letter-spacing: 0.5px;
+      font-size: 18px;
     }
 
     hr.line1 {
@@ -67,6 +94,10 @@
       width: 28px;
       position: absolute;
       right: 30px;
+    }
+
+    .hide {
+      display: none;
     }
 
 /*COLORS:
