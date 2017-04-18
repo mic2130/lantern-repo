@@ -1,16 +1,14 @@
 <home>
 
-
     <div class="alllanterns" >
+
       <div class="lantern" style="position: absolute; left:{leftVal}%; bottom:{ bottomVal }%; transition: bottom 1s">
         <img src="../img/lanternA.png" alt="">
       </div>
       <button type="button" name="button" onclick={ flyLantern } style="position:absolute; left:90%">Complete a Task</button>
     </div>
 
-    <div class="avatar" >
-      <img src="" alt="">
-    </div>
+    <sidebar></sidebar>
 
     <script>
         var that = this;
@@ -19,21 +17,21 @@
         this.bottomVal = 15;
         this.tasks = [{},{},{},{},{}];
 
-        this.donePercent = 0;
-        this.donePercent = numDone / this.tasks.length;
-
-        this.lanternSteps = [];
-        var database = firebase.database();
-        this.lanterListSteps = database.ref(LanternList/key/steps);
+        // this.donePercent = 0;
+        // this.donePercent = numDone / this.tasks.length;
+        //
+        // this.lanternSteps = [];
+        // var database = firebase.database();
+        // this.lanterListSteps = database.ref(LanternList/key/steps);
 
         flyLantern(){
           console.log(this.tasks.length);
 
-          // this.eachDistance = 70 / this.tasks.length;
-          // this.bottomVal = this.bottomVal + this.eachDistance
-          // if (this.bottomVal > 85) {
-          //   this.bottomVal = 85;
-          // }
+          this.eachDistance = 70 / this.tasks.length;
+          this.bottomVal = this.bottomVal + this.eachDistance
+          if (this.bottomVal > 85) {
+            this.bottomVal = 85;
+          }
         }
 
     </script>
