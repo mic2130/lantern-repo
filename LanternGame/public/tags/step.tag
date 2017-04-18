@@ -2,7 +2,7 @@
 
 
   <div class="checkbox" onclick={ disable }>
-    <label><input id="id" type="checkbox">{ step }</label>
+    <label><input id="id" type="checkbox">{ step } { done }</label>
   </div>
 
 

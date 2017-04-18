@@ -177,8 +177,9 @@
       var database = firebase.database() //shortcut to the firebase
       var lanternListRef = database.ref('LanternList');
       var newKey = lanternListRef.push().key;
-      // newLantern.id = this.newKey;
+      newLantern.id = newKey;
       lanternListRef.child(newKey).set(newLantern);
+
     //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
 
       document.querySelector('#profileHome').classList.remove('hide');
