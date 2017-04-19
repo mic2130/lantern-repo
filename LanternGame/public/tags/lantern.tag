@@ -12,6 +12,7 @@
   <div show={ listShown }>
     <p><strong>Steps:</strong></p>
     <step each={ step, i in steps }></step>
+    <button type="button" onclick={ deleteLantern }>Delete Lantern</button>
   </div>
 
   <hr class="line2">
@@ -19,6 +20,7 @@
 
 
   <script>
+    var that = this;
     console.log('this', this);
     // var goal = this.parent.lanternList;
 
@@ -33,17 +35,26 @@
 
 		updateSteps(event){
 			var stepsRef = firebase.database().ref('LanternList/' + this.id + '/steps');
-
 			var step = event.item.step;
-
 			step.done = !step.done;
-
 			console.log('stepsAry', this.steps);
-
 			stepsRef.set(this.steps);
-
 		}
 
+    // var txt;
+    // var r = confirm("Press a button!");
+    // if (r == true) {
+    //     txt = "You pressed OK!";
+    // } else {
+    //     txt = "You pressed Cancel!";
+    // }
+
+    deleteLantern() {
+      if (confirm("Are you sure you want to delete this lantern?")) {
+        var lanternRef = firebase.database().ref('LanternList/' +this.id);
+        lanternRef.set(null);
+        that.update();
+    }}
 
 
 
