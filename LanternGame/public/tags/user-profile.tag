@@ -13,7 +13,7 @@
   <hr class="line2">
 
   <!--TAG lantern here-->
-  <lantern each={ lanternList }></lantern>
+  <lantern each={ parent.parent.lanternList }></lantern>
   <button class="basic" type="button" name="createLanternButton" onclick={ createLantern }>Create a new lantern</button>
   <div>
   </div>
@@ -186,15 +186,15 @@
       document.querySelector('#setFirstDeadline').classList.add('hide');
   }
 
-  var database = firebase.database();
-  var lanternListRef = database.ref('LanternList');
-
-  lanternListRef.on('child_added', function(snapshot) {
-    var data = snapshot.val();
-    that.lanternList.push(data);
-    console.log('lanternList array' + that.lanternList);
-    that.update();
-  });
+  // var database = firebase.database();
+  // var lanternListRef = database.ref('LanternList');
+  //
+  // lanternListRef.on('child_added', function(snapshot) {
+  //   var data = snapshot.val();
+  //   that.lanternList.push(data);
+  //   console.log('lanternList array' + that.lanternList);
+  //   that.update();
+  // });
 
   // Object.values(x) <-- throw in the object
 

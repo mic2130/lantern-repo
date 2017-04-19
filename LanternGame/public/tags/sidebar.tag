@@ -34,8 +34,8 @@
       background: #242D39;
       margin-top: 0;
       padding: 30px;
-      /*min-height: 100%;
-      margin-bottom: -101%;*/
+      min-height: 100%;
+      margin-bottom: -101%;
       padding-bottom: 300%;
       box-shadow: 0 0 20px black;
     }

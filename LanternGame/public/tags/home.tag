@@ -1,21 +1,47 @@
 <home>
 
-    <div class="alllanterns" >
+    <div class="allanterns" >
 
-      <div class="lantern" style="position: absolute; left:{leftVal}%; bottom:{ bottomVal }%; transition: bottom 1s">
-        <img src="../img/lanternA.png" alt="">
-      </div>
-      <button type="button" name="button" onclick={ flyLantern } style="position:absolute; left:90%">Complete a Task</button>
+      <button style="float:right; margin-right:150px" type="button" onclick={ hideSidebar }>Hide</button>
+      <button style="float:right; margin-right:10px"type="button" onclick={ showSidebar }>Show</button>
     </div>
 
-    <sidebar></sidebar>
+    <sidebar show={ sidebarShown }></sidebar>
+    <lantern-icon each={ lanternList }></lantern-icon>
+
 
     <script>
         var that = this;
-        console.log("test home");
-        this.leftVal = Math.floor(Math.random() * 50 + 40);;
-        this.bottomVal = 15;
-        this.tasks = [{},{},{},{},{}];
+        console.log("test home", this);
+
+
+        this.sidebarShown = true;
+
+        this.hideSidebar = function() {
+          this.sidebarShown = false;
+        }
+
+        this.showSidebar = function() {
+          this.sidebarShown = true;
+        }
+
+        this.lanternList = [];
+
+        var database = firebase.database();
+        var lanternListRef = database.ref('LanternList');
+
+// get lanternList data from Firebase
+        lanternListRef.on('value', function(snapshot) {
+          var data = snapshot.val();
+          var lanternsArray = [];
+          for (var key in data) {
+            lanternsArray.push(data[key]);
+          }
+          that.lanternList = lanternsArray;
+          console.log('this.lanternList', that.lanternList);
+          that.update();
+        });
+
 
         // this.donePercent = 0;
         // this.donePercent = numDone / this.tasks.length;
@@ -24,21 +50,13 @@
         // var database = firebase.database();
         // this.lanterListSteps = database.ref(LanternList/key/steps);
 
-        flyLantern(){
-          console.log(this.tasks.length);
 
-          this.eachDistance = 70 / this.tasks.length;
-          this.bottomVal = this.bottomVal + this.eachDistance
-          if (this.bottomVal > 85) {
-            this.bottomVal = 85;
-          }
-        }
 
     </script>
 
     <style>
 
-        .alllanterns {
+        .allanterns {
             position: fixed;
             width: 100%;
             height: 100%;
@@ -58,22 +76,6 @@
             top:0;
             left:0;
             z-index: 999;
-
-        }
-
-        .lantern {
-          background: url("../img/lanternA.png");
-          -webkit-animation-name:lantern;
-          -webkit-animation-duration: 2.5s;
-          animation-name: lantern;
-          animation-iteration-count: infinite;
-        }
-
-        @-webkit-keyframes lantern {
-          0%   {background: url("../img/lanternA.png");}
-          25%  {background: url("../img/lanternB.png");}
-          50%  {background: url("../img/lanternC.png");}
-          100% {background: url("../img/lanternB.png");}
         }
 
 
