@@ -6,7 +6,7 @@
       <button style="float:right; margin-right:10px"type="button" onclick={ showSidebar }>Show</button>
     </div>
 
-    <sidebar show={ sidebarShown }></sidebar>
+    <sidebar show={ sidebarShown } lanterns={ lanternList }></sidebar>
     <lantern-icon each={ lanternList }></lantern-icon>
 
 

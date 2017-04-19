@@ -26,13 +26,23 @@
       }
     }
 
+		this.on('update', function() {
+		  console.log('CHECKINGLANTERN:', this);
+		});
+
+		this.on('mount', function(){
+		  console.log('MOUNT:', this);
+		})
+
 
 
   </script>
 
 
   <style>
+		:scope {
 
+		}
     h2 {
       font-family: work sans;
       font-weight: 500;

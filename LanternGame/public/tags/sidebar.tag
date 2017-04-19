@@ -5,16 +5,19 @@
          <div class="col-md-5">
            <div id="sidebar">
                <!--TAG USER PROFILE HERE-->
-              <user-profile></user-profile>
-
+              <user-profile lanterns={ lanterns }></user-profile>
            </div>
          </div>
        </div>
      </div>
 
   <script>
-    console.log("test sidebar");
+    console.log("test sidebar", this, this.lanterns);
+		this.lanterns = this.opts.lanterns;
 
+		this.on('update', function(args){
+		  this.lanterns = this.opts.lanterns;
+		});
   </script>
 
   <style>

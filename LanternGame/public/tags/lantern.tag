@@ -11,7 +11,7 @@
 
   <div show={ listShown }>
     <p><strong>Steps:</strong></p>
-    <step each={ steps }></step>
+    <step each={ step, i in steps }></step>
   </div>
 
   <hr class="line2">
@@ -21,14 +21,28 @@
   <script>
     console.log('this', this);
     // var goal = this.parent.lanternList;
-    this.listShown = false;
 
     this.showDetails = function() {
-      this.listShown = true;
+			var openRef = firebase.database().ref('LanternList/' + this.id + '/listShown');
+			openRef.set(true);
     }
     this.hideDetails = function(){
-      this.listShown = false;
+			var openRef = firebase.database().ref('LanternList/' + this.id + '/listShown');
+			openRef.set(false);
     }
+
+		updateSteps(event){
+			var stepsRef = firebase.database().ref('LanternList/' + this.id + '/steps');
+
+			var step = event.item.step;
+
+			step.done = !step.done;
+
+			console.log('stepsAry', this.steps);
+
+			stepsRef.set(this.steps);
+
+		}
 
 
 
@@ -109,3 +123,19 @@ Light: 200 (inside input boxes)
   </style>
 
 </lantern>
+
+
+<!-- <tagName>
+
+
+	<script>
+		var that = this;
+		console.log('tagName.tag');
+	</script>
+
+	<style>
+		:scope {
+			display: block;
+		}
+	</style>
+</tagName> -->
