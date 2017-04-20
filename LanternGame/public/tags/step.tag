@@ -7,8 +7,6 @@
 	<script>
 		var that = this;
 		console.log('step', this);
-
-
 	</script>
 
 	<style>
