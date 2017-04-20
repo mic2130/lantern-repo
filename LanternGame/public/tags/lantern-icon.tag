@@ -12,6 +12,9 @@
 
 
   <script>
+    var that = this;
+    var database = firebase.database();
+
     this.leftVal = Math.floor(Math.random() * 50 + 40);;
     this.bottomVal = 0;
     this.tasks = [{},{},{},{},{}];
@@ -20,6 +23,21 @@
       parent.sidebarShown = true;
     }
 
+
+    // get steps array from FB
+      var stepsRef = database.ref('LanternList/' + this.id + '/steps');
+      this.allSteps = [];
+
+      stepsRef.on('value', function (snapshot) {
+        var data = snapshot.val();
+        var stepsArray = [];
+        for (var key in data) {
+          stepsArray.push(data[key]);
+        }
+        that.allSteps = stepsArray;
+        that.update();
+        // console.log("all steps array", that.allSteps);
+      });
 
     flyLantern(){
       console.log(this.tasks.length);

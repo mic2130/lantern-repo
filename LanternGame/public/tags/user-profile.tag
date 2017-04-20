@@ -171,7 +171,7 @@
       newLantern.steps = that.stepObjects;
       newLantern.nextStep = that.refs.firstStepDeadline.value;
 
-      var database = firebase.database() //shortcut to the firebase
+      var database = firebase.database(); //shortcut to the firebase
       var lanternListRef = database.ref('LanternList');
       var newKey = lanternListRef.push().key;
       newLantern.id = newKey;
