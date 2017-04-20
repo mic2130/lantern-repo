@@ -7,15 +7,14 @@
 
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #C9C9C9;" onclick={ showSidebar }></span>
 
-    <div show={ sidebarShown }  class="sidebar">
-      <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
-      <user-profile lanterns={ lanternList }></user-profile>
+    <div show={ sidebarShown } class="sidebar">
+        <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
+        <user-profile lanterns={ lanternList }></user-profile>
     </div>
 
     <div class="container">
-      <lantern-icon each={ lanternList }></lantern-icon>
+        <lantern-icon each={ lanternList }></lantern-icon>
     </div>
-
 
     <script>
         var that = this;
@@ -25,7 +24,7 @@
 
         this.hideSidebar = function () {
             this.sidebarShown = false;
-          }
+        }
 
         this.showSidebar = function () {
             this.sidebarShown = true;
@@ -55,7 +54,9 @@
 
     <style>
 
-        :scope {
+    /*bg has defined in auth page*/
+
+        /*:scope {
             position: fixed;
             width: 100%;
             height: 100%;
@@ -67,42 +68,41 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
-        }
+        }*/
 
         .container {
             display: flex;
             height: 1000px;
-            margin-right:0px;
+            margin-right: 0;
         }
 
         .sidebar {
-          height: 100%;
-          width: 450px;
-          position: fixed;
-          z-index: 1;
-          top: 0;
-          left: 0;
-          background-color: #242D39;
-          overflow-x: hidden;
-          transition: 0.5s;
-          padding-top: 30px;
-          box-shadow: 0 0 20px black;
+            height: 100%;
+            width: 450px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #242D39;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 30px;
+            box-shadow: 0 0 20px black;
         }
 
         .glyphicon-remove {
-          position: absolute;
-          right: 25px;
-          margin-top: 25px;
-          font-size: 22px;
+            position: absolute;
+            right: 25px;
+            margin-top: 25px;
+            font-size: 22px;
         }
 
         .glyphicon-menu-hamburger {
-          position: absolute;
-          top: 30px;
-          left: 25px;
-          font-size: 32px;
+            position: absolute;
+            top: 30px;
+            left: 25px;
+            font-size: 32px;
         }
-
 
     </style>
 

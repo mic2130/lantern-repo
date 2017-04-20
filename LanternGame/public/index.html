@@ -1,66 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!--BOOTSTRAP -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-  <!--GOOGLE FONTS -->
-  <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600" rel="stylesheet">
+    <!--GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600" rel="stylesheet">
 
 
 
-  <title>Lanterns</title>
+    <title>Lanterns</title>
 </head>
 
 <body>
 
-<!-- DIV FOR LOGGING IN WITH SAME BG IMG, HOME MOUNTS WHEN LOGGED IN -->
+    <!-- DIV FOR LOGGING IN WITH SAME BG IMG, HOME MOUNTS WHEN LOGGED IN -->
 
-<!--RIOT TAG -->
-<home></home>
+    <!--RIOT TAG -->
+    <!-- <auth></auth> -->
+    <home></home>
 
-<!-- <div id="myCanvas"></div> -->
+    <!-- <div id="myCanvas"></div> -->
 
-<!--FIREBASE -->
+    <!--FIREBASE -->
 
-<script src="https://www.gstatic.com/firebasejs/3.7.8/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyANsmpbnKkzdZdPMeT5Ge30zifjT-nNQ6k",
-    authDomain: "lanterngame-5387f.firebaseapp.com",
-    databaseURL: "https://lanterngame-5387f.firebaseio.com",
-    projectId: "lanterngame-5387f",
-    storageBucket: "lanterngame-5387f.appspot.com",
-    messagingSenderId: "473213191529"
-  };
-  firebase.initializeApp(config);
-</script>
-
-
-<!--RIOT TAG SCRIPTS -->
-<script src="tags/home.tag" type="riot/tag"></script>
-<script src="tags/sidebar.tag" type="riot/tag"></script>
-<script src="tags/user-profile.tag" type="riot/tag"></script>
-<script src="tags/lantern.tag" type="riot/tag"></script>
-<script src="tags/step-input.tag" type="riot/tag"></script>
-<script src="tags/step.tag" type="riot/tag"></script>
-<script src="tags/lantern-icon.tag" type="riot/tag"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.8/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyANsmpbnKkzdZdPMeT5Ge30zifjT-nNQ6k",
+            authDomain: "lanterngame-5387f.firebaseapp.com",
+            databaseURL: "https://lanterngame-5387f.firebaseio.com",
+            projectId: "lanterngame-5387f",
+            storageBucket: "lanterngame-5387f.appspot.com",
+            messagingSenderId: "473213191529"
+        };
+        firebase.initializeApp(config);
+    </script>
 
 
-<script src="https://cdn.jsdelivr.net/riot/3.1/riot+compiler.js">
-</script>
+    <!--RIOT TAG SCRIPTS -->
+    <!-- auth: control login /log out -->
+    <script src="tags/auth.tag" type="riot/tag"></script>
+    <!-- after login, control firebase data delivery -->
+    <script src="tags/home.tag" type="riot/tag"></script>
+    <!-- public page seeing others' lantern -->
+    <script src="tags/social.tag" type="riot/tag"></script>
+    <!-- sidebar control page -->
+    <script src="tags/user-profile.tag" type="riot/tag"></script>
+    <!-- lantern list page -->
+    <script src="tags/lantern.tag" type="riot/tag"></script>
+    <script src="tags/step-input.tag" type="riot/tag"></script>
+    <script src="tags/step.tag" type="riot/tag"></script>
+    <!-- control lantern actions -->
+    <script src="tags/lantern-icon.tag" type="riot/tag"></script>
 
-<script>
-  riot.mount('*');
-</script>
+
+    <script src="https://cdn.jsdelivr.net/riot/3.1/riot+compiler.js">
+    </script>
+
+    <script>
+        riot.mount('*');
+    </script>
 
 
 
 
 </body>
+
 </html>
