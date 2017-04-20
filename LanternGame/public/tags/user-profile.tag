@@ -1,5 +1,7 @@
 <user-profile>
 
+<div class="userProfile">
+
 <div id="profileHome">
   <div class="userProfileSection">
     <img src={ userProfileData.picture }/>
@@ -8,15 +10,13 @@
   </div>
 
 
-<div class="lanternListSection">
+<div>
   <h4>Lanterns</h4>
   <hr class="line2">
 
   <!--TAG lantern here-->
   <lantern each={ lanternList }></lantern>
   <button class="basic" type="button" name="createLanternButton" onclick={ createLantern }>Create a new lantern</button>
-  <div>
-  </div>
 
 </div>
 </div>
@@ -77,6 +77,8 @@
   <script>
     console.log('x', this);
     var that = this;
+
+		this.lanternList = this.opts.lanterns;
 
     // `this.steps = [{...},{...},{...}];` // Start with three step objects. Each time the button is pushed, create a `stepObject` and `push()` it to the `this.steps` array. Your template will use the `each` special attribute.  `<step-input each={ steps }></step-input>`.
 
@@ -154,7 +156,7 @@
 
     this.lanternListData = [];
     this.stepList = [];
-    this.lanternList = [];
+    // this.lanternList = [];
 
 
 // IN CASE WE WANT TO SAVE STEPS BEFORE SAVING LANTERN
@@ -186,23 +188,32 @@
       document.querySelector('#setFirstDeadline').classList.add('hide');
   }
 
-  var database = firebase.database();
-  var lanternListRef = database.ref('LanternList');
-
-  lanternListRef.on('child_added', function(snapshot) {
-    var data = snapshot.val();
-    that.lanternList.push(data);
-    console.log('lanternList array' + that.lanternList);
-    that.update();
-  });
+  // var database = firebase.database();
+  // var lanternListRef = database.ref('LanternList');
+  //
+  // lanternListRef.on('child_added', function(snapshot) {
+  //   var data = snapshot.val();
+  //   that.lanternList.push(data);
+  //   console.log('lanternList array' + that.lanternList);
+  //   that.update();
+  // });
 
   // Object.values(x) <-- throw in the object
+
+	this.on('update', function(event){
+	  this.lanternList = this.opts.lanterns;
+		console.log('update -----------', this.lanternList);
+	});
 
   </script>
 
 
 
   <style>
+
+    .userProfile {
+      padding: 30px;
+    }
 
     p {
       color: #C9C9C9;

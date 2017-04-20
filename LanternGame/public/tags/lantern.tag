@@ -1,17 +1,19 @@
 <lantern>
 
 
-<div ref="preview">
+<div>
   <img class="lanternIcon" src="img/lanternicon.png" alt="lantern icon">
   <!-- <img class="stateIcon" src="img/notdone.png" alt="state icon" onclick={ showDetails }> -->
-  <span class="glyphicon glyphicon-plus" style="color: blue;" onclick={ showDetails } show={ !listShown }></span>
-  <span class="glyphicon glyphicon-minus" show={ listShown } style="color: blue;" onclick={ hideDetails }></span>
-  <p onclick={ showDetails }><strong>Goal:</strong> { goal }</p>
-  <p onclick={ showDetails }><strong>Deadline:</strong> { deadline }</p>
 
+  <span onclick={ showDetails }>{ goal }</span>
+  <span class="glyphicon glyphicon-collapse-down" style="left: 300px; color: #C9C9C9;" onclick={ showDetails } show={ !listShown }></span>
+  <span class="glyphicon glyphicon-collapse-up" show={ listShown } style="left: 300px; color: #C9C9C9;" onclick={ hideDetails }></span>
   <div show={ listShown }>
+    <br>
+    <p><strong>Deadline:</strong> { deadline }</p>
     <p><strong>Steps:</strong></p>
-    <step each={ steps }></step>
+    <step each={ step, i in steps }></step>
+    <button type="button" onclick={ deleteLantern }>Delete Lantern</button>
   </div>
 
   <hr class="line2">
@@ -19,17 +21,41 @@
 
 
   <script>
+    var that = this;
     console.log('this', this);
     // var goal = this.parent.lanternList;
-    this.listShown = false;
 
     this.showDetails = function() {
-      this.listShown = true;
+			var openRef = firebase.database().ref('LanternList/' + this.id + '/listShown');
+			openRef.set(true);
     }
     this.hideDetails = function(){
-      this.listShown = false;
+			var openRef = firebase.database().ref('LanternList/' + this.id + '/listShown');
+			openRef.set(false);
     }
 
+		updateSteps(event){
+			var stepsRef = firebase.database().ref('LanternList/' + this.id + '/steps');
+			var step = event.item.step;
+			step.done = !step.done;
+			console.log('stepsAry', this.steps);
+			stepsRef.set(this.steps);
+		}
+
+    // var txt;
+    // var r = confirm("Press a button!");
+    // if (r == true) {
+    //     txt = "You pressed OK!";
+    // } else {
+    //     txt = "You pressed Cancel!";
+    // }
+
+    deleteLantern() {
+      if (confirm("Are you sure you want to delete this lantern?")) {
+        var lanternRef = firebase.database().ref('LanternList/' +this.id);
+        lanternRef.set(null);
+        that.update();
+    }}
 
 
 
@@ -50,7 +76,7 @@
       color: #C9C9C9;
     }
 
-    p {
+    p, span {
       font-family: work sans;
       font-weight: 300;
       color: #C9C9C9;
@@ -91,6 +117,10 @@
       display: none;
     }
 
+    .glyphicon {
+      font-size: 20px;
+    }
+
 /*COLORS:
 Font Gray: #C9C9C9
 Font Dark Gray: #2C3440
@@ -109,3 +139,19 @@ Light: 200 (inside input boxes)
   </style>
 
 </lantern>
+
+
+<!-- <tagName>
+
+
+	<script>
+		var that = this;
+		console.log('tagName.tag');
+	</script>
+
+	<style>
+		:scope {
+			display: block;
+		}
+	</style>
+</tagName> -->

@@ -1,76 +1,109 @@
 <home>
 
-     <img class="bg" src="img/bg.jpg" alt="background">
+    <!-- <button style="float:right; margin-right:150px" type="button" onclick={ hideSidebar }>Hide</button>
+    <button style="float:right; margin-right:10px" type="button" onclick={ showSidebar }>Show</button> -->
+
+    <!-- <sidebar show={ sidebarShown } lanterns={ lanternList }></sidebar> -->
+
+    <span class="glyphicon glyphicon-menu-hamburger" style="color: #C9C9C9;" onclick={ showSidebar }></span>
+
+    <div show={ sidebarShown }  class="sidebar">
+      <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
+      <user-profile lanterns={ lanternList }></user-profile>
+    </div>
+
+    <div class="container">
+      <lantern-icon each={ lanternList }></lantern-icon>
+    </div>
 
 
+    <script>
+        var that = this;
+        console.log("test home", this);
 
-     <div id="nonmargin" class="container">
-       <div class="row">
-         <div class="col-md-5">
-           <div id="sidebar">
-               <!--TAG USER PROFILE HERE-->
-              <user-profile></user-profile>
+        this.sidebarShown = true;
 
-           </div>
-         </div>
-       </div>
-     </div>
+        this.hideSidebar = function () {
+            this.sidebarShown = false;
+          }
 
-  <script>
-    console.log("test");
+        this.showSidebar = function () {
+            this.sidebarShown = true;
+        }
 
-  </script>
+        this.lanternList = [];
 
-  <style>
+        var database = firebase.database();
+        var lanternListRef = database.ref('LanternList');
 
-body {
+        // get lanternList data from Firebase
+        lanternListRef.on('value', function (snapshot) {
+            var data = snapshot.val();
+            var lanternsArray = [];
+            for (var key in data) {
+                lanternsArray.push(data[key]);
+            }
+            that.lanternList = lanternsArray;
+            console.log('this.lanternList', that.lanternList);
+            that.update();
+        });
 
-}
+        // this.donePercent = 0; this.donePercent = numDone / this.tasks.length;
+        //
+        // this.lanternSteps = []; var database = firebase.database(); this.lanterListSteps = database.ref(LanternList/key/steps);
+    </script>
+
+    <style>
+
+        :scope {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 0;
+            background: url("../img/bg.jpg");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .container {
+            display: flex;
+            height: 1000px;
+            margin-right:0px;
+        }
+
+        .sidebar {
+          height: 100%;
+          width: 450px;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: #242D39;
+          overflow-x: hidden;
+          transition: 0.5s;
+          padding-top: 30px;
+          box-shadow: 0 0 20px black;
+        }
+
+        .glyphicon-remove {
+          position: absolute;
+          right: 25px;
+          margin-top: 25px;
+          font-size: 22px;
+        }
+
+        .glyphicon-menu-hamburger {
+          position: absolute;
+          top: 30px;
+          left: 25px;
+          font-size: 32px;
+        }
 
 
-
-  img.bg {
-    /* Set rules to fill background */
-    min-height: 100%;
-    min-width: 1024px;
-
-    /* Set up proportionate scaling */
-    width: 100%;
-    height: auto;
-
-    /* Set up positioning */
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-
-  @media screen and (max-width: 1024px) { /* Specific to this particular image */
-    img.bg {
-      left: 50%;
-      margin-left: -512px;   /* 50% */
-    }
-  }
-
-
-/*need a better solution for the 100% height side bar*/
-#nonmargin {
-  margin: 0;
-  padding-left: 0;
-}
-
-/*need a better solution for the 100% height side bar*/
-#sidebar {
-  position: relative;
-  background: #242D39;
-  margin-top: 0;
-  padding: 30px;
-  min-height: 100%;
-  margin-bottom: -101%;
-  padding-bottom: 300%;
-  box-shadow: 0 0 20px black;
-}
-
-
-  </style>
+    </style>
 
 </home>

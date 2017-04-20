@@ -11,24 +11,30 @@
   <!--GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600" rel="stylesheet">
 
-  <title>LanternGame HI MONSTER</title>
+
+
+  <title>Lanterns</title>
 </head>
 
+<body>
 
+<!-- DIV FOR LOGGING IN WITH SAME BG IMG, HOME MOUNTS WHEN LOGGED IN -->
 
 <!--RIOT TAG -->
 <home></home>
 
+<!-- <div id="myCanvas"></div> -->
+
 <!--FIREBASE -->
 
-
-<script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.8/firebase.js"></script>
 <script>
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyANsmpbnKkzdZdPMeT5Ge30zifjT-nNQ6k",
     authDomain: "lanterngame-5387f.firebaseapp.com",
     databaseURL: "https://lanterngame-5387f.firebaseio.com",
+    projectId: "lanterngame-5387f",
     storageBucket: "lanterngame-5387f.appspot.com",
     messagingSenderId: "473213191529"
   };
@@ -38,10 +44,12 @@
 
 <!--RIOT TAG SCRIPTS -->
 <script src="tags/home.tag" type="riot/tag"></script>
+<script src="tags/sidebar.tag" type="riot/tag"></script>
 <script src="tags/user-profile.tag" type="riot/tag"></script>
 <script src="tags/lantern.tag" type="riot/tag"></script>
 <script src="tags/step-input.tag" type="riot/tag"></script>
 <script src="tags/step.tag" type="riot/tag"></script>
+<script src="tags/lantern-icon.tag" type="riot/tag"></script>
 
 
 <script src="https://cdn.jsdelivr.net/riot/3.1/riot+compiler.js">
@@ -52,7 +60,7 @@
 </script>
 
 
-<body>
+
 
 </body>
 </html>
