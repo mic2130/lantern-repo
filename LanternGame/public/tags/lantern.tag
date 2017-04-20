@@ -2,12 +2,15 @@
 
 
 <div>
-  <img class="lanternIcon" src="img/lanternicon.png" alt="lantern icon">
-  <!-- <img class="stateIcon" src="img/notdone.png" alt="state icon" onclick={ showDetails }> -->
 
-  <span onclick={ showDetails }>{ goal }</span>
-  <span class="glyphicon glyphicon-collapse-down" style="left: 300px; color: #C9C9C9;" onclick={ showDetails } show={ !listShown }></span>
-  <span class="glyphicon glyphicon-collapse-up" show={ listShown } style="left: 300px; color: #C9C9C9;" onclick={ hideDetails }></span>
+  <div class="container2">
+    <img class="lanternIcon item1" src="img/lanternicon.png" alt="lantern icon">
+    <!-- <img class="stateIcon" src="img/notdone.png" alt="state icon" onclick={ showDetails }> -->
+    <p class="item2" onclick={ showDetails }>{ goal }</p>
+    <span class="glyphicon glyphicon-collapse-down item3" onclick={ showDetails } show={ !listShown }></span>
+    <span class="glyphicon glyphicon-collapse-up item3" show={ listShown } onclick={ hideDetails }></span>
+  </div>
+
   <div show={ listShown }>
     <br>
     <p><strong>Deadline:</strong> { deadline }</p>
@@ -22,7 +25,6 @@
 
   <script>
     var that = this;
-    console.log('this', this);
     // var goal = this.parent.lanternList;
 
     this.showDetails = function() {
@@ -42,13 +44,6 @@
 			stepsRef.set(this.steps);
 		}
 
-    // var txt;
-    // var r = confirm("Press a button!");
-    // if (r == true) {
-    //     txt = "You pressed OK!";
-    // } else {
-    //     txt = "You pressed Cancel!";
-    // }
 
     deleteLantern() {
       if (confirm("Are you sure you want to delete this lantern?")) {
@@ -119,7 +114,44 @@
 
     .glyphicon {
       font-size: 20px;
+      color: #C9C9C9;
     }
+
+    .container2 {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .item1 {
+      flex-grow: 1;
+      max-width: 25px;
+      max-height: 32px;
+      min-width: 25px;
+      min-height: 32px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .item2 {
+      margin-left: 17px;
+      margin-right: 17px;
+      flex-grow: 2;
+      min-width: 312px;
+    }
+
+    .item3 {
+      flex-grow: 1;
+    }
+
+    button.basic {
+      font-family: work sans;
+      font-weight: 400;
+      color: #2C3440;
+      background:#C9C9C9;
+      border-radius: 10px;
+      border: none;
+    }
+
 
 /*COLORS:
 Font Gray: #C9C9C9

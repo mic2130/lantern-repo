@@ -13,13 +13,12 @@
     </div>
 
     <div class="container">
-      <lantern-icon each={ lanternList }></lantern-icon>
+      <lantern-icon class="lanternItem" each={ lanternList }></lantern-icon>
     </div>
 
 
     <script>
         var that = this;
-        console.log("test home", this);
 
         this.sidebarShown = true;
 
@@ -44,7 +43,6 @@
                 lanternsArray.push(data[key]);
             }
             that.lanternList = lanternsArray;
-            console.log('this.lanternList', that.lanternList);
             that.update();
         });
 
@@ -67,12 +65,6 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
-        }
-
-        .container {
-            display: flex;
-            height: 1000px;
-            margin-right:0px;
         }
 
         .sidebar {
@@ -101,6 +93,17 @@
           top: 30px;
           left: 25px;
           font-size: 32px;
+        }
+
+        .container {
+          display: flex;
+          height: 80%;
+          margin-right:0px;
+          margin-left: 450px;
+        }
+
+        .lanternItem {
+          flex-grow: 1;
         }
 
 
