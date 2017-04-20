@@ -74,6 +74,8 @@
     <script>
         console.log('x', this);
         var that = this;
+        this.user = firebase.auth().currentUser;
+
         this.profileHome=true;
         this.setGoal=false;
         this.setDeadline=false;
@@ -175,6 +177,8 @@
         // this.lanternList = []; IN CASE WE WANT TO SAVE STEPS BEFORE SAVING LANTERN saveSteps() {   ref('lantern/-key/steps').set(stepObjects); }
 
         completeLantern() {
+
+
             // that.stepList.push(that.opts.data); that.update();
             var newLantern = {};
             newLantern.goal = that.refs.goal.value; //grab the user goal value
@@ -189,6 +193,8 @@
             var newKey = lanternListRef.push().key;
             newLantern.id = newKey;
             lanternListRef.child(newKey).set(newLantern);
+            set['users/' + this.user.uid + '/' + "LanternList" + newLantern ] = newLantern;
+
 
             //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
             this.profileHome=true;

@@ -1,6 +1,5 @@
 <lantern-icon>
 
-    <button type="button" name="button" onclick={ flyLantern } style="position:absolute; left:90%">Complete a Task</button>
     <div class="lantern" style="width:150px; height:150px; position: absolute; left:{leftVal}%; bottom:{ bottomVal }%; transition: bottom 1s" onclick={ showSidebar }></div>
 
     <script>

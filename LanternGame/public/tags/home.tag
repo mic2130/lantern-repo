@@ -18,6 +18,8 @@
 
     <script>
         var that = this;
+        this.user = firebase.auth().currentUser;
+
         console.log("test home", this);
 
         this.sidebarShown = true;
