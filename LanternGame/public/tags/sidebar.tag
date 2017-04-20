@@ -12,7 +12,6 @@
      </div>
 
   <script>
-    console.log("test sidebar", this, this.lanterns);
 		this.lanterns = this.opts.lanterns;
 
 		this.on('update', function(args){
@@ -41,6 +40,18 @@
       margin-bottom: -101%;
       padding-bottom: 300%;
       box-shadow: 0 0 20px black;
+    }
+    
+    button.basic {
+      font-family: work sans;
+      font-weight: 400;
+      color: #2C3440;
+      background: #C9C9C9;
+      border-radius: 10px;
+      border: none;
+      padding: 3px;
+      padding-left: 10px;
+      padding-right: 10px;
     }
 
   </style>

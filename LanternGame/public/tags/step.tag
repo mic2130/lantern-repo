@@ -1,12 +1,11 @@
 <step>
 
 	<div class="checkbox" onclick={ disable }>
-		<label onchange={ parent.updateSteps }><input type="checkbox" checked={ step.done }>{ step.goal }</label>
+		<label onchange={ parent.updateSteps }><input type="checkbox" checked={ step.done }>{ step.step }</label>
 	</div>
 
 	<script>
 		var that = this;
-		console.log('step', this);
 
 
 	</script>

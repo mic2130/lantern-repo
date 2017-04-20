@@ -1,19 +1,23 @@
 <lantern-icon>
 
-<button type="button" name="button" onclick={ flyLantern } style="position:absolute; left:90%">Complete a Task</button>
-<div class="lantern" style="width:150px; height:150px; position: absolute; left:{leftVal}%; bottom:{ bottomVal }%; transition: bottom 1s" onclick={ showSidebar }>
+<!-- <button type="button" name="button" onclick={ flyLantern } style="position:absolute; left:90%">Complete a Task</button> -->
+<div class="lanternDiv">
+  <img src="../img/tr.png" class="lantern" style=" bottom:{ bottomVal }%; transition: bottom 1s;">
+</div>
+
+<!-- <div class="lantern" onclick={ showSidebar } style=" bottom:{ bottomVal }%; transition: bottom 1s;"> -->
+<!-- left:{leftVal}%; -->
   <!-- <img  src="../img/lanternA.png" alt=""> -->
 </div>
 
 
   <script>
     this.leftVal = Math.floor(Math.random() * 50 + 40);;
-    this.bottomVal = 15;
+    this.bottomVal = 0;
     this.tasks = [{},{},{},{},{}];
 
     this.showSidebar = function() {
       parent.sidebarShown = true;
-      console.log("sidebar show called");
     }
 
 
@@ -26,24 +30,15 @@
       }
     }
 
-		this.on('update', function() {
-		  console.log('CHECKINGLANTERN:', this);
-		});
-
-		this.on('mount', function(){
-		  console.log('MOUNT:', this);
-		})
-
-
-
   </script>
 
 
   <style>
 		:scope {
       display: block;
+      height: 100%;
 		}
-    
+
     h2 {
       font-family: work sans;
       font-weight: 500;
@@ -64,45 +59,16 @@
       font-size: 18px;
     }
 
-    hr.line1 {
-      border-top: 1px solid #C9C9C9;
-    }
-
-    hr.line2 {
-      border-top: 0.5px solid #2C3440;
-    }
-
-    button.basic {
-      font-family: work sans;
-      font-weight: 400;
-      color: #2C3440;
-      background:#C9C9C9;
-      border-radius: 10px;
-      border: none;
-    }
-
-    img.lanternIcon {
-      display: inline;
-      width: 18px;
-    }
-
-    img.stateIcon {
-      display: inline;
-      width: 28px;
-      position: absolute;
-      right: 30px;
-    }
-
-    .hide {
-      display: none;
-    }
 
     .lantern {
-      background: url("../img/lanternA.png");
       -webkit-animation-name:lantern;
       -webkit-animation-duration: 2.5s;
       animation-name: lantern;
       animation-iteration-count: infinite;
+      width:150px;
+      height:150px;
+      margin: auto;
+      align-self: flex-end;
     }
 
     @-webkit-keyframes lantern {
@@ -111,6 +77,13 @@
       50%  {background: url("../img/lanternC.png");}
       100% {background: url("../img/lanternB.png");}
     }
+
+    .lanternDiv {
+      display: flex;
+      align-items: flex-end;
+      min-height: 100%;
+    }
+
 
 /*COLORS:
 Font Gray: #C9C9C9

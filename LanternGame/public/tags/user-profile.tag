@@ -75,7 +75,6 @@
 
 
   <script>
-    console.log('x', this);
     var that = this;
 
 		this.lanternList = this.opts.lanterns;
@@ -93,9 +92,6 @@
       that.stepObjects.push(x);
     };
 
-
-
-    console.log("test");
 
     this.userProfileData = {
       name: "Fiore",
@@ -174,7 +170,6 @@
       newLantern.deadline = that.refs.deadline.value;
       newLantern.steps = that.stepObjects;
       newLantern.nextStep = that.refs.firstStepDeadline.value;
-      console.log(newLantern);
 
       var database = firebase.database() //shortcut to the firebase
       var lanternListRef = database.ref('LanternList');
@@ -202,7 +197,6 @@
 
 	this.on('update', function(event){
 	  this.lanternList = this.opts.lanterns;
-		console.log('update -----------', this.lanternList);
 	});
 
   </script>
@@ -249,7 +243,7 @@
       border-top: 0.5px solid #2C3440;
     }
 
-    button.basic {
+    button {
       font-family: work sans;
       font-weight: 400;
       color: #2C3440;
