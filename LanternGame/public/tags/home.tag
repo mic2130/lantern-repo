@@ -1,9 +1,17 @@
 <home>
 
-    <button style="float:right; margin-right:150px" type="button" onclick={ hideSidebar }>Hide</button>
-    <button style="float:right; margin-right:10px" type="button" onclick={ showSidebar }>Show</button>
+    <!-- <button style="float:right; margin-right:150px" type="button" onclick={ hideSidebar }>Hide</button>
+    <button style="float:right; margin-right:10px" type="button" onclick={ showSidebar }>Show</button> -->
 
-    <sidebar show={ sidebarShown } lanterns={ lanternList }></sidebar>
+    <!-- <sidebar show={ sidebarShown } lanterns={ lanternList }></sidebar> -->
+
+    <span class="glyphicon glyphicon-menu-hamburger" style="color: #C9C9C9;" onclick={ showSidebar }></span>
+
+    <div show={ sidebarShown }  class="sidebar">
+      <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
+      <user-profile lanterns={ lanternList }></user-profile>
+    </div>
+
     <div class="container">
       <lantern-icon each={ lanternList }></lantern-icon>
     </div>
@@ -17,7 +25,7 @@
 
         this.hideSidebar = function () {
             this.sidebarShown = false;
-        }
+          }
 
         this.showSidebar = function () {
             this.sidebarShown = true;
@@ -61,19 +69,40 @@
             background-size: cover;
         }
 
-        sidebar {
-            height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 999;
+        .container {
+            display: flex;
+            height: 1000px;
+            margin-right:0px;
         }
 
-        .container {
-            /*display: flex;
-            height: 1000px;
-            margin-right:0px;*/
+        .sidebar {
+          height: 100%;
+          width: 450px;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: #242D39;
+          overflow-x: hidden;
+          transition: 0.5s;
+          padding-top: 30px;
+          box-shadow: 0 0 20px black;
         }
+
+        .glyphicon-remove {
+          position: absolute;
+          right: 25px;
+          margin-top: 25px;
+          font-size: 22px;
+        }
+
+        .glyphicon-menu-hamburger {
+          position: absolute;
+          top: 30px;
+          left: 25px;
+          font-size: 32px;
+        }
+
 
     </style>
 

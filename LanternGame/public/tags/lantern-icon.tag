@@ -41,8 +41,9 @@
 
   <style>
 		:scope {
-
+      display: block;
 		}
+    
     h2 {
       font-family: work sans;
       font-weight: 500;

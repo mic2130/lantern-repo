@@ -1,5 +1,7 @@
 <user-profile>
 
+<div class="userProfile">
+
 <div id="profileHome">
   <div class="userProfileSection">
     <img src={ userProfileData.picture }/>
@@ -8,15 +10,13 @@
   </div>
 
 
-<div class="lanternListSection">
+<div>
   <h4>Lanterns</h4>
   <hr class="line2">
 
   <!--TAG lantern here-->
   <lantern each={ lanternList }></lantern>
   <button class="basic" type="button" name="createLanternButton" onclick={ createLantern }>Create a new lantern</button>
-  <div>
-  </div>
 
 </div>
 </div>
@@ -210,6 +210,10 @@
 
 
   <style>
+
+    .userProfile {
+      padding: 30px;
+    }
 
     p {
       color: #C9C9C9;
