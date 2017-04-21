@@ -36,7 +36,7 @@
 			openRef.set(false);
     }
 
-    var doneSteps = [];
+    var stepsDone;
 
 		updateSteps(event){
 			var stepsRef = firebase.database().ref('LanternList/' + this.id + '/steps');
@@ -45,54 +45,11 @@
 			// console.log('stepsAry', this.steps);
 			stepsRef.set(this.steps);
       that.update();
-
-      var doneStepsRef = firebase.database().ref('LanternList/' + this.id + '/doneSteps');
-      doneStepsRef.on('value', function(snapshot) {
-        var data = snapshot.val();
-        var doneStepsArray = [];
-        for (var key in data) {
-          doneStepsArray.push(data[key]);
-        }
-        that.doneSteps = doneStepsArray;
-        that.update();
-        console.log("data pulled from fb");
-      });
-      if (step.done) {
-        that.doneSteps.push(step);
-        that.update();
-        doneStepsRef.set(that.doneSteps);
-      }
-
-      // that.doneSteps = doneStepsArray;
-      // doneStepsRef.set(that.doneSteps);
-      console.log(that.doneSteps);
-
-    }
-
-      // var lanternListRef = database.ref('LanternList');
-      // var newKey = lanternListRef.push().key;
-      // newLantern.id = newKey;
-      // lanternListRef.child(newKey).set(newLantern);
-
-      // stepsRef.on('value', function (snapshot) {
-      //   var data = snapshot.val();
-      //   var stepsArray = [];
-      //   for (var key in data) {
-      //     stepsArray.push(data[key]);
-      //   }
-      //   that.allSteps = stepsArray;
-      //   that.update();
-      //   // console.log("all steps array", that.allSteps);
-      // });
-
-
-
-
-
+    };
 
     deleteLantern() {
       if (confirm("Are you sure you want to delete this lantern?")) {
-        var lanternRef = firebase.database().ref('LanternList/' +this.id);
+        var lanternRef = firebase.database().ref('LanternList/' + this.id);
         lanternRef.set(null);
         that.update();
     }};

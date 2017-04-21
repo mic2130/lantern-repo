@@ -22,10 +22,12 @@
         // SIDEBAR
         this.sidebarShown = true;
         this.hideSidebar = function () {
-            this.sidebarShown = false;
+            that.sidebarShown = false;
         }
         this.showSidebar = function () {
-            this.sidebarShown = true;
+            that.sidebarShown = true;
+            that.update();
+            console.log(that.sidebarShown);
         }
 
         // firebase shortcut
@@ -43,6 +45,8 @@
             that.lanternList = lanternsArray;
             that.update();
         });
+
+
 
 
 

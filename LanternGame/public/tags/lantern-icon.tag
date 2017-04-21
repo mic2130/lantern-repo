@@ -2,7 +2,10 @@
 
 <!-- <button type="button" name="button" onclick={ flyLantern } style="position:absolute; left:90%">Complete a Task</button> -->
 <div class="lanternDiv">
-  <img src="../img/tr.png" class="lantern" style=" bottom:{ bottomVal }%; transition: bottom 1s;">
+  <div onclick={ parent.showSidebar }>
+    <img onclick={ listShown ? hideDetails : showDetails } src="../img/tr.png" class="lantern" style=" bottom:{ bottomVal }%; transition: bottom 1s;">
+  </div>
+
 </div>
 
 <!-- <div class="lantern" onclick={ showSidebar } style=" bottom:{ bottomVal }%; transition: bottom 1s;"> -->
@@ -17,16 +20,21 @@
 
     this.leftVal = Math.floor(Math.random() * 50 + 40);;
     this.bottomVal = 0;
-    this.tasks = [{},{},{},{},{}];
 
-    this.showSidebar = function() {
-      parent.sidebarShown = true;
+    this.showDetails = function() {
+      var openRef = firebase.database().ref('LanternList/' + this.id + '/listShown');
+      openRef.set(true);
+      console.log("this.showDetails");
     }
+  
 
 
     // get steps array from FB
       var stepsRef = database.ref('LanternList/' + this.id + '/steps');
-      this.allSteps = [];
+      var allSteps;
+      var stepsDone;
+      var decimal;
+
 
       stepsRef.on('value', function (snapshot) {
         var data = snapshot.val();
@@ -34,19 +42,30 @@
         for (var key in data) {
           stepsArray.push(data[key]);
         }
-        that.allSteps = stepsArray;
-        that.update();
-        // console.log("all steps array", that.allSteps);
+        that.allSteps = stepsArray.length;
+        console.log("all steps:", that.allSteps);
+
+        var doneSteps = stepsArray.filter(function(x){
+          return x.done;
+        })
+        that.stepsDone = doneSteps.length;
+        console.log("done steps:", that.stepsDone);
+        that.decimal = that.stepsDone/that.allSteps;
+        console.log(that.decimal);
+        that.bottomVal = that.decimal*100;
       });
 
-    flyLantern(){
-      console.log(this.tasks.length);
-      this.eachDistance = 70 / this.tasks.length;
-      this.bottomVal = this.bottomVal + this.eachDistance
-      if (this.bottomVal > 85) {
-        this.bottomVal = 85;
-      }
-    }
+
+
+
+    // flyLantern(){
+    //   console.log(this.tasks.length);
+    //   this.eachDistance = 70 / this.tasks.length;
+    //   this.bottomVal = this.bottomVal + this.eachDistance
+    //   if (this.bottomVal > 85) {
+    //     this.bottomVal = 85;
+    //   }
+    // }
 
   </script>
 
