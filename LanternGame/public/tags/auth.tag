@@ -17,6 +17,15 @@
         logIn(event) {
             var provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(provider);
+            // var database = firebase.database() //shortcut to the firebase
+            // var lanternListRef = database.ref('userList');
+            // // var newKey = lanternListRef.push().key;
+            // // lanternListRef.child(newKey).set(this.user.uid);
+            // set['userList/' + this.user.uid] = this.user.uid ;
+
+
+
+
 
         }
 

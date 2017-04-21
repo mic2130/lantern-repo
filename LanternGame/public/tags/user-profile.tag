@@ -186,14 +186,14 @@
             newLantern.deadline = that.refs.deadline.value;
             newLantern.steps = that.stepObjects;
             newLantern.nextStep = that.refs.firstStepDeadline.value;
+            newLantern.listShown=false;
             console.log(newLantern);
 
             var database = firebase.database() //shortcut to the firebase
-            var lanternListRef = database.ref('LanternList');
+            var lanternListRef = database.ref('userList/' + this.user.uid);
             var newKey = lanternListRef.push().key;
             newLantern.id = newKey;
             lanternListRef.child(newKey).set(newLantern);
-            set['users/' + this.user.uid + '/' + "LanternList" + newLantern ] = newLantern;
 
 
             //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
