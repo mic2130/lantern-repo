@@ -5,6 +5,7 @@
 
     <!-- <sidebar show={ sidebarShown } lanterns={ lanternList }></sidebar> -->
 
+
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #C9C9C9;" onclick={ showSidebar }></span>
 
     <div show={ sidebarShown } class="sidebar">
@@ -33,7 +34,8 @@
 
         this.lanternList = [];
 
-		    this.user = firebase.auth().currentUser;
+        this.user = firebase.auth().currentUser;
+
 
         var database = firebase.database() //shortcut to the firebase
         var lanternListRef = database.ref('userList/' + this.user.uid);

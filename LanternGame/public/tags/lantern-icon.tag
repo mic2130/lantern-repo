@@ -2,8 +2,10 @@
 
     <div class="lantern" style="width:150px; height:150px; position: absolute; left:{leftVal}%; bottom:{ bottomVal }%; transition: bottom 1s" onclick={ showSidebar }></div>
 
+    </div>
+
     <script>
-        this.leftVal = Math.floor(Math.random() * 50 + 40);;
+        this.leftVal = Math.floor(Math.random() * 50 + 40);
         this.bottomVal = 15;
         this.tasks = [{}, {}, {}, {}, {}];
         this.showSidebar = function () {
@@ -94,7 +96,13 @@
             -webkit-animation-duration: 2.5s;
             animation-name: lantern;
             animation-iteration-count: infinite;
+            -webkit-transform: perspective(1px) translateZ(0);
+            transform: perspective(1px) translateZ(0);
+            box-shadow: 0 0 1px transparent;
+            -webkit-transition-duration: 0.5s;
+            transition-duration: 0.5s;
         }
+
         @-webkit-keyframes lantern {
             0% {
                 background: url("../img/lanternA.png");

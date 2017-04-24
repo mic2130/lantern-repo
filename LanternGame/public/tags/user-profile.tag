@@ -195,6 +195,14 @@
             newLantern.id = newKey;
             lanternListRef.child(newKey).set(newLantern);
 
+            //write only goal/deadline/lantern id to publicLanternList
+            var newPublicLantern={};
+            newPublicLantern.goal=that.refs.goal.value;
+            newPublicLantern.deadline=that.refs.deadline.value;
+            newPublicLantern.id=newKey;
+            var publicLanternList=database.ref('publicLanternList');
+            publicLanternList.child(newKey).set(newPublicLantern);
+            
 
             //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
             this.profileHome=true;

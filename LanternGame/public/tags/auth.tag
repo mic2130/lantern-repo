@@ -2,36 +2,52 @@
 
     <button if={ !user } class="btn btn-warning" onClick={ logIn }>Log In</button>
     <button if={ user } class="btn btn-success" onClick={ logOut }>Log Out</button>
+    <button if={ user } show={!showSocial} class="btn btn-info" onClick={ goToSocial }>See Others Lantern</button>
+    <button if={ user } show={showSocial} class="btn btn-info" onClick={ goToPrivate }>Back to Private</button>
 
-    <social if={!user}></social>
-    <home if={user}></home>
+    <public-social if={!user}></public-social>
+    <home if={user} show={!showSocial}></home>
+    <private-social if={user} show={showSocial}></private-social>
 
     <script>
         var that = this;
-        this.user = firebase.auth().currentUser;
+        this.showSocial=false;
+        // this.user = firebase.auth().currentUser;
         firebase.auth().onAuthStateChanged(function (userObj) {
-            that.user = firebase.auth().currentUser;
+            if (userObj) {
+                that.user = userObj;
+            } else {
+                that.user = null;
+            }
+            // that.user = firebase.auth().currentUser;
             that.update();
         });
 
         logIn(event) {
             var provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider);
-            // var database = firebase.database() //shortcut to the firebase
-            // var lanternListRef = database.ref('userList');
-            // // var newKey = lanternListRef.push().key;
-            // // lanternListRef.child(newKey).set(this.user.uid);
-            // set['userList/' + this.user.uid] = this.user.uid ;
-
-
-
-
-
+            firebase.auth().signInWithPopup(provider).then(function(result) {
+                user = result.user;
+            }).catch(function (error) {
+                console.log('Error:', error.code, error.message);
+                console.log('Email of account used:', error.email);
+                console.log('Credential type used;', error.credential);
+            });
         }
 
         logOut(event) {
             firebase.auth().signOut();
             that.update;
+        }
+
+        this.on('update', function(event) {
+            console.log('auth.tag upadte');
+        });
+
+        goToSocial(event){
+          this.showSocial=true;
+        }
+        goToPrivate(event){
+          this.showSocial=false;
         }
     </script>
     <style>
