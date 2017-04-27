@@ -8,8 +8,10 @@
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #C9C9C9;" onclick={ showSidebar }></span>
 
     <div show={ sidebarShown } class="sidebar">
+      <div onclick={ cancelCreateLantern }>
         <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
-        <user-profile lanterns={ lanternList }></user-profile>
+      </div>
+      <user-profile lanterns={ lanternList }></user-profile>
     </div>
 
     <div class="container">
@@ -46,6 +48,17 @@
             that.update();
         });
 
+        this.cancelCreateLantern = function(){
+          document.querySelector('#profileHome').classList.remove('hide');
+          document.querySelector('#setGoal').classList.add('hide');
+          document.querySelector('#setDeadline').classList.add('hide');
+          document.querySelector('#setSteps').classList.add('hide');
+          document.querySelector('#setFirstDeadline').classList.add('hide');
+          document.querySelector('.lanternInput').value = "";
+          document.querySelector('.lanternDateInput').value = "yyyy-MM-dd";
+          document.querySelector('.firstStepDeadlineInput').value = "yyyy-MM-dd";
+          that.stepObjects = [{},{},{}];
+        }
 
 
 
@@ -104,6 +117,7 @@
             height: 80%;
             margin-right: 0;
             margin-left: 450px;
+            padding-top: 8%;
         }
 
         .lanternItem {

@@ -2,8 +2,8 @@
 
 <!-- <button type="button" name="button" onclick={ flyLantern } style="position:absolute; left:90%">Complete a Task</button> -->
 <div class="lanternDiv">
-  <div onclick={ parent.showSidebar }>
-    <img onclick={ listShown ? hideDetails : showDetails } src="../img/tr.png" class="lantern" style=" bottom:{ bottomVal }%; transition: bottom 1s;">
+  <div class="x" onclick={ parent.showSidebar } style=" bottom:{ bottomVal }%; transition: bottom 1s;">
+    <img onclick={ showDetails } src="../img/tr.png" class="lantern">
   </div>
 
 </div>
@@ -19,14 +19,14 @@
     var database = firebase.database();
 
     this.leftVal = Math.floor(Math.random() * 50 + 40);;
-    this.bottomVal = 0;
+    // this.bottomVal = 40;
 
     this.showDetails = function() {
       var openRef = firebase.database().ref('LanternList/' + this.id + '/listShown');
       openRef.set(true);
       console.log("this.showDetails");
     }
-  
+
 
 
     // get steps array from FB
@@ -34,6 +34,7 @@
       var allSteps;
       var stepsDone;
       var decimal;
+      var bottomVal;
 
 
       stepsRef.on('value', function (snapshot) {
@@ -51,8 +52,8 @@
         that.stepsDone = doneSteps.length;
         console.log("done steps:", that.stepsDone);
         that.decimal = that.stepsDone/that.allSteps;
-        console.log(that.decimal);
         that.bottomVal = that.decimal*100;
+        console.log("bottom Val =", that.bottomVal);
       });
 
 
@@ -96,14 +97,17 @@
       font-size: 18px;
     }
 
+    .x {
+      position: absolute;
+    }
 
     .lantern {
       -webkit-animation-name:lantern;
       -webkit-animation-duration: 2.5s;
       animation-name: lantern;
       animation-iteration-count: infinite;
-      width:150px;
-      height:150px;
+      max-width:120px;
+      max-height:120px;
       margin: auto;
       align-self: flex-end;
     }
@@ -119,6 +123,7 @@
       display: flex;
       align-items: flex-end;
       min-height: 100%;
+      position: relative;
     }
 
 
