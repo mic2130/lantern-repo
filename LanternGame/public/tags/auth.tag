@@ -22,6 +22,13 @@
             // that.user = firebase.auth().currentUser;
             that.update();
         });
+        var user, name, email, photoUrl, uid;
+        if(user != null){
+          name =user.displayName;
+          email = user.email;
+          photoUrl=user.photoURL;
+          uid=user.uid;
+        }
 
         logIn(event) {
             var provider = new firebase.auth.GoogleAuthProvider();

@@ -38,7 +38,7 @@
 
 
         var database = firebase.database() //shortcut to the firebase
-        var lanternListRef = database.ref('userList/' + this.user.uid);
+        var lanternListRef = database.ref('userLanternList/'+ this.user.uid);
         // var lanternListRef = database.ref('userList');
         // get lanternList data from Firebase
         lanternListRef.on('value', function (snapshot) {

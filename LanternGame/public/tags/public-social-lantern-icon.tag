@@ -2,8 +2,7 @@
 
     <div class="lantern hvr-bounce-in " style="left:{leftVal}%; bottom:{ bottomVal }%">
         <span class="tooltiptext" >
-            <strong>Goal:</strong><br> {goal}<br>
-            <strong>Deadline:</strong> <br>{deadline}
+            <strong>Goal:</strong><br> {goal}
         </span>
 
     </div>
@@ -65,7 +64,8 @@
             font-size:0.1vw;
             text-align: center;
             border-radius: 6px;
-            margin:6vw ;
+            margin: 2vw;
+            margin-top:15vh;
 
 
 

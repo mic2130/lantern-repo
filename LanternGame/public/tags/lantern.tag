@@ -29,17 +29,17 @@
     this.user=firebase.auth().currentUser;
 
     this.showDetails = function() {
-			var openRef = firebase.database().ref('userList/'+ this.user.uid +'/' + this.id + '/listShown');
+			var openRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/listShown');
 			openRef.set(true);
       console.log(this.id);
     }
     this.hideDetails = function(){
-			var openRef = firebase.database().ref('userList/'+ this.user.uid +'/' + this.id + '/listShown');
+			var openRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/listShown');
 			openRef.set(false);
     }
 
 		updateSteps(event){
-			var stepsRef = firebase.database().ref('userList/'+ this.user.uid +'/' + this.id + '/steps');
+			var stepsRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/steps');
 			var step = event.item.step;
 			step.done = !step.done;
 			console.log('stepsAry', this.steps);
@@ -49,7 +49,7 @@
 
     deleteLantern() {
       if (confirm("Are you sure you want to delete this lantern?")) {
-        var lanternRef = firebase.database().ref('LanternList/' +this.id);
+        var lanternRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID);
         lanternRef.set(null);
         that.update();
     }}

@@ -4,8 +4,8 @@
 
         <div show={profileHome}>
             <div class="userProfileSection">
-                <img src={ userProfileData.picture }/>
-                <h2>{ userProfileData.name }</h2>
+                <img style="width:20%" src={ user.photoURL }/>
+              <h2>  <strong>Hello,&nbsp</strong>{user.displayName}</h2>
                 <hr class="line1">
             </div>
 
@@ -187,22 +187,32 @@
             newLantern.steps = that.stepObjects;
             newLantern.nextStep = that.refs.firstStepDeadline.value;
             newLantern.listShown=false;
+            newLantern.userID=this.user.uid;
             console.log(newLantern);
 
             var database = firebase.database() //shortcut to the firebase
-            var lanternListRef = database.ref('userList/' + this.user.uid);
-            var newKey = lanternListRef.push().key;
-            newLantern.id = newKey;
-            lanternListRef.child(newKey).set(newLantern);
+            var userLanternListRef = database.ref('userLanternList/'+ this.user.uid);
+            var newKey = userLanternListRef.push().key;
+            newLantern.lanternID = newKey;
+            userLanternListRef.child(newKey).set(newLantern);
 
-            //write only goal/deadline/lantern id to publicLanternList
+            //read only goal/lantern id to publicLanternList
             var newPublicLantern={};
             newPublicLantern.goal=that.refs.goal.value;
-            newPublicLantern.deadline=that.refs.deadline.value;
-            newPublicLantern.id=newKey;
-            var publicLanternList=database.ref('publicLanternList');
-            publicLanternList.child(newKey).set(newPublicLantern);
-            
+            newPublicLantern.lanternID=newKey;
+            var publicLanternListRef=database.ref('publicLanternList');
+            publicLanternListRef.child(newKey).set(newPublicLantern);
+
+            //read goal/deadline/userName
+            var newUserPublicLantern={};
+            newUserPublicLantern.goal=that.refs.goal.value;
+            newUserPublicLantern.deadline=that.refs.deadline.value;
+            newUserPublicLantern.userID=this.user.uid;
+            newUserPublicLantern.userName=this.user.displayName;
+            newUserPublicLantern.lanternID=newKey;
+            var userPublicLanternListRef=database.ref('userPublicLanternList');
+            userPublicLanternListRef.child(newKey).set(newUserPublicLantern);
+
 
             //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
             this.profileHome=true;

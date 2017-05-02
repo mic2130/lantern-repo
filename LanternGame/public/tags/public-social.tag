@@ -10,9 +10,6 @@ var that=this;
 this.publicLanternList = [];
 
 
-this.user = firebase.auth().currentUser;
-
-
 var database = firebase.database() //shortcut to the firebase
 var publicLanternListRef = database.ref('publicLanternList');
 // var lanternListRef = database.ref('userList');
