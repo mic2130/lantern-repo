@@ -57,14 +57,19 @@
             visibility: hidden;
             opacity:0.7;
             height:200vw;
-            background: url("../img/dialogue.png");
+            background: -webkit-linear-gradient(top, #ffd170, rgba(255,0,0,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom, #ffd170, rgba(255,0,0,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom, #ffd170, rgba(255,0,0,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom, #ffd170, rgba(255,0,0,1)); /* Standard syntax (must be last) */
             background-size: 100% 100%;
             background-repeat: no-repeat;
             color: white;
             font-size:0.1vw;
             text-align: center;
             border-radius: 6px;
-            margin: 2vw;
+            position: absolute;
+            display: inline;
+            margin: 4vw;
             margin-top:15vh;
 
 
