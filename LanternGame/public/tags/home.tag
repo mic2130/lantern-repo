@@ -5,9 +5,11 @@
 
     <!-- <sidebar show={ sidebarShown } lanterns={ lanternList }></sidebar> -->
 
+
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #C9C9C9;" onclick={ showSidebar }></span>
 
     <div show={ sidebarShown } class="sidebar">
+<<<<<<< HEAD
       <div onclick={ cancelCreateLantern }>
         <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
       </div>
@@ -16,28 +18,59 @@
 
     <div class="container">
         <lantern-icon class="lanternItem" each={ lanternList }></lantern-icon>
+=======
+        <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
+        <user-profile lanterns={ lanternList }></user-profile>
+    </div>
+
+    <div class="container">
+        <lantern-icon each={ lanternList }></lantern-icon>
+>>>>>>> yr2314
     </div>
 
     <script>
         var that = this;
+<<<<<<< HEAD
+=======
+
+        console.log("test home", this);
+>>>>>>> yr2314
 
         // SIDEBAR
         this.sidebarShown = true;
         this.hideSidebar = function () {
+<<<<<<< HEAD
             that.sidebarShown = false;
         }
+=======
+            this.sidebarShown = false;
+        }
+
+>>>>>>> yr2314
         this.showSidebar = function () {
             that.sidebarShown = true;
             that.update();
             console.log(that.sidebarShown);
         }
 
+<<<<<<< HEAD
         // firebase shortcut
         var database = firebase.database();
 
         // LANTERNLIST data from Firebase to create lantern icons
         var lanternListRef = database.ref('LanternList');
         this.lanternList = [];
+=======
+        this.lanternList = [];
+
+        this.user = firebase.auth().currentUser;
+
+
+        var database = firebase.database() //shortcut to the firebase
+        var lanternListRef = database.ref('userLanternList/'+ this.user.uid);
+        // var lanternListRef = database.ref('userList');
+        // get lanternList data from Firebase
+>>>>>>> yr2314
         lanternListRef.on('value', function (snapshot) {
             var data = snapshot.val();
             var lanternsArray = [];
@@ -70,7 +103,9 @@
 
     <style>
 
-        :scope {
+    /*bg has defined in auth page*/
+
+        /*:scope {
             position: fixed;
             width: 100%;
             height: 100%;
@@ -82,8 +117,17 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
+        }*/
+
+<<<<<<< HEAD
+=======
+        .container {
+            display: flex;
+            height: 1000px;
+            margin-right: 0;
         }
 
+>>>>>>> yr2314
         .sidebar {
             height: 100%;
             width: 450px;
@@ -112,6 +156,7 @@
             font-size: 32px;
         }
 
+<<<<<<< HEAD
         .container {
             display: flex;
             height: 80%;
@@ -124,6 +169,8 @@
             flex-grow: 1;
         }
 
+=======
+>>>>>>> yr2314
     </style>
 
 </home>

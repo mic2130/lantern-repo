@@ -6,8 +6,12 @@
 
 	<script>
 		var that = this;
+<<<<<<< HEAD
 
 
+=======
+		console.log('step', this);
+>>>>>>> yr2314
 	</script>
 
 	<style>

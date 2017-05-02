@@ -26,30 +26,41 @@
   <script>
     var that = this;
     // var goal = this.parent.lanternList;
+    this.user=firebase.auth().currentUser;
 
     this.showDetails = function() {
-			var openRef = firebase.database().ref('LanternList/' + this.id + '/listShown');
+			var openRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/listShown');
 			openRef.set(true);
+      console.log(this.id);
     }
     this.hideDetails = function(){
-			var openRef = firebase.database().ref('LanternList/' + this.id + '/listShown');
+			var openRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/listShown');
 			openRef.set(false);
     }
 
     var stepsDone;
 
 		updateSteps(event){
-			var stepsRef = firebase.database().ref('LanternList/' + this.id + '/steps');
+			var stepsRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/steps');
 			var step = event.item.step;
 			step.done = !step.done;
 			// console.log('stepsAry', this.steps);
 			stepsRef.set(this.steps);
+<<<<<<< HEAD
       that.update();
     };
 
     deleteLantern() {
       if (confirm("Are you sure you want to delete this lantern?")) {
         var lanternRef = firebase.database().ref('LanternList/' + this.id);
+=======
+		}
+
+
+    deleteLantern() {
+      if (confirm("Are you sure you want to delete this lantern?")) {
+        var lanternRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID);
+>>>>>>> yr2314
         lanternRef.set(null);
         that.update();
     }};
@@ -139,12 +150,21 @@
       margin-right: 17px;
       flex-grow: 2;
       min-width: 312px;
+<<<<<<< HEAD
     }
 
     .item3 {
       flex-grow: 1;
     }
 
+=======
+    }
+
+    .item3 {
+      flex-grow: 1;
+    }
+
+>>>>>>> yr2314
     button.basic {
       font-family: work sans;
       font-weight: 400;
