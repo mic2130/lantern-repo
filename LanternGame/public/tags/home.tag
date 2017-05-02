@@ -7,35 +7,37 @@
 
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #C9C9C9;" onclick={ showSidebar }></span>
 
-    <div show={ sidebarShown }  class="sidebar">
-      <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
+    <div show={ sidebarShown } class="sidebar">
+      <div onclick={ cancelCreateLantern }>
+        <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
+      </div>
       <user-profile lanterns={ lanternList }></user-profile>
     </div>
 
     <div class="container">
-      <lantern-icon class="lanternItem" each={ lanternList }></lantern-icon>
+        <lantern-icon class="lanternItem" each={ lanternList }></lantern-icon>
     </div>
-
 
     <script>
         var that = this;
 
+        // SIDEBAR
         this.sidebarShown = true;
-
         this.hideSidebar = function () {
-            this.sidebarShown = false;
-          }
-
+            that.sidebarShown = false;
+        }
         this.showSidebar = function () {
-            this.sidebarShown = true;
+            that.sidebarShown = true;
+            that.update();
+            console.log(that.sidebarShown);
         }
 
-        this.lanternList = [];
-
+        // firebase shortcut
         var database = firebase.database();
-        var lanternListRef = database.ref('LanternList');
 
-        // get lanternList data from Firebase
+        // LANTERNLIST data from Firebase to create lantern icons
+        var lanternListRef = database.ref('LanternList');
+        this.lanternList = [];
         lanternListRef.on('value', function (snapshot) {
             var data = snapshot.val();
             var lanternsArray = [];
@@ -45,6 +47,21 @@
             that.lanternList = lanternsArray;
             that.update();
         });
+
+        this.cancelCreateLantern = function(){
+          document.querySelector('#profileHome').classList.remove('hide');
+          document.querySelector('#setGoal').classList.add('hide');
+          document.querySelector('#setDeadline').classList.add('hide');
+          document.querySelector('#setSteps').classList.add('hide');
+          document.querySelector('#setFirstDeadline').classList.add('hide');
+          document.querySelector('.lanternInput').value = "";
+          document.querySelector('.lanternDateInput').value = "yyyy-MM-dd";
+          document.querySelector('.firstStepDeadlineInput').value = "yyyy-MM-dd";
+          that.stepObjects = [{},{},{}];
+        }
+
+
+
 
         // this.donePercent = 0; this.donePercent = numDone / this.tasks.length;
         //
@@ -68,44 +85,44 @@
         }
 
         .sidebar {
-          height: 100%;
-          width: 450px;
-          position: fixed;
-          z-index: 1;
-          top: 0;
-          left: 0;
-          background-color: #242D39;
-          overflow-x: hidden;
-          transition: 0.5s;
-          padding-top: 30px;
-          box-shadow: 0 0 20px black;
+            height: 100%;
+            width: 450px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #242D39;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 30px;
+            box-shadow: 0 0 20px black;
         }
 
         .glyphicon-remove {
-          position: absolute;
-          right: 25px;
-          margin-top: 25px;
-          font-size: 22px;
+            position: absolute;
+            right: 25px;
+            margin-top: 25px;
+            font-size: 22px;
         }
 
         .glyphicon-menu-hamburger {
-          position: absolute;
-          top: 30px;
-          left: 25px;
-          font-size: 32px;
+            position: absolute;
+            top: 30px;
+            left: 25px;
+            font-size: 32px;
         }
 
         .container {
-          display: flex;
-          height: 80%;
-          margin-right:0px;
-          margin-left: 450px;
+            display: flex;
+            height: 80%;
+            margin-right: 0;
+            margin-left: 450px;
+            padding-top: 8%;
         }
 
         .lanternItem {
-          flex-grow: 1;
+            flex-grow: 1;
         }
-
 
     </style>
 

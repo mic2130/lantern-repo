@@ -25,49 +25,47 @@
 
 <!-- GOAL -->
 <div id="setGoal" class="hide">
-  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
-  <p>Let's start lighting the way to achieve your goal.</p>
-  <img src="http://placehold.it/100x100" alt="Placeholder for lantern image">
-  <p>What is your goal?</p>
-  <input ref="goal" class="lanternInput" class="input" type="text" placeholder="Enter Goal" onkeypress={ addLantern }>
-  <button type="button" name="button" onclick={ goToSetDeadline }>next</button>
+  <p class="message">Let's start lighting the way to achieve your goal.</p>
+  <img class="formLantern" src="../img/formLantern.png">
+  <p class="submessage">What is your long-term goal?</p>
+  <input ref="goal" class="lanternInput" class="input" type="text" placeholder="You Goal Here" onkeypress={ addLantern }>
+  <br>
+  <button type="button" name="cancel" onclick={ parent.cancelCreateLantern}>back</button>
+  <button class="nextBtn" type="button" name="button" class="nextBtn" onclick={ goToSetDeadline }>next</button>
 </div>
 
 <!-- DEADLINE -->
 <div id="setDeadline" class="hide">
-  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
-  <p>Congratualations for your lanterns! Let's set a deadline for it.</p>
-  <img src="http://placehold.it/100x100" alt="Placeholder for lantern image">
-  <p>When do you want this goal to come true?</p>
+  <p class="message">That sounds like a great goal! Let's set a deadline for it.</p>
+  <img class="formLantern" src="../img/formLantern.png">
+  <p class="submessage">What will be the deadline?</p>
   <input ref="deadline" class="lanternDateInput" type="date" name="deadline" value="yyyy-MM-dd">
   <button type="button" name="back" onclick={ backToSetGoal }>back</button>
-  <button type="button" name="next" onclick={ goToSetSteps }>next</button>
+  <button class="nextBtn" type="button" name="next" onclick={ goToSetSteps }>next</button>
 </div>
 
 <!-- STEPS -->
 <div id="setSteps" class="hide">
-  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
-  <p>One small steps at a time. Let's break it out!</p>
-  <p>What small concrete steps do you want to make this goal come true?</p>
+  <p class="message">One small step at a time. Let's break it out!</p>
+  <p class="submessage">What small concrete steps do you want to make this goal come true?</p>
   <div>
-    <p>Steps</p>
+    <p class="submessage" style="text-align: left; font-size: 18px; margin-left: 5px;">Steps:</p>
     <!-- step-input tags -->
       <step-input each={ stepObjects } opts={ data }></step-input>
     <!-- button that creates step-input tags -->
-    <img type="button" src="http://placehold.it/30x30" alt="Plus another task" onclick={ makeStepObject }>
+    <img type="button" src="../img/plus.png" class="plusBtn" onclick={ makeStepObject }>
   </div>
   <button type="button" name="back" onclick={ backToSetDeadline }>back</button>
-  <button type="button" name="next" onclick={ goToSetFirstDeadline }>next</button>
+  <button type="button" name="next" class="nextBtn" onclick={ goToSetFirstDeadline }>next</button>
 </div>
 
 <div id="setFirstDeadline" class="hide">
-  <h2>When do you want to complete your first step by?</h2>
-  <h3>Your first step:</h3>
-  <p>{ firstStep }</p>
-  <input ref="firstStepDeadline" class="firstStepDeadlineInput" type="date" name="deadline" value="yyyy-MM-dd">
-  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
+  <p class="message">When do you want to complete your first step by?</p>
+  <p class="submessage" style="margin-top: 50px;">Your first step:</p>
+  <p class="submessage" style="color: #FFD700;">{ firstStep }</p>
+  <input style="margin-bottom: 60px; margin-top: 30px;" ref="firstStepDeadline" class="firstStepDeadlineInput" type="date" name="deadline" value="yyyy-MM-dd">
   <button type="button" name="back" onclick={ backToSetSteps }>back</button>
-  <button type="button" name="button" onclick={ completeLantern }>Complete my Lantern!</button>
+  <button type="button" name="button" onclick={ completeLantern } style="margin-left: 115px;">Complete my Lantern!</button>
 </div>
 
 </div>
@@ -136,23 +134,9 @@
       document.querySelector('#setFirstDeadline').classList.add('hide');
     }
 
-    this.cancelCreateLantern = function(){
-      document.querySelector('#profileHome').classList.remove('hide');
-      document.querySelector('#setGoal').classList.add('hide');
-      document.querySelector('#setDeadline').classList.add('hide');
-      document.querySelector('#setSteps').classList.add('hide');
-      document.querySelector('#setFirstDeadline').classList.add('hide');
-      document.querySelector('.lanternInput').value = "";
-      document.querySelector('.lanternDateInput').value = "yyyy-MM-dd";
-      document.querySelector('.firstStepDeadlineInput').value = "yyyy-MM-dd";
-      that.stepObjects = [{},{},{}];
-    }
-
-    // database.ref(). = userProfileData
 
     this.lanternListData = [];
     this.stepList = [];
-    // this.lanternList = [];
 
 
 // IN CASE WE WANT TO SAVE STEPS BEFORE SAVING LANTERN
@@ -162,8 +146,6 @@
 
 
   completeLantern(){
-    // that.stepList.push(that.opts.data);
-    // that.update();
     var newLantern = {};
       newLantern.goal = that.refs.goal.value; //grab the user goal value
       newLantern.done = false;
@@ -171,29 +153,17 @@
       newLantern.steps = that.stepObjects;
       newLantern.nextStep = that.refs.firstStepDeadline.value;
 
-      var database = firebase.database() //shortcut to the firebase
+      var database = firebase.database(); //shortcut to the firebase
       var lanternListRef = database.ref('LanternList');
       var newKey = lanternListRef.push().key;
       newLantern.id = newKey;
       lanternListRef.child(newKey).set(newLantern);
 
-    //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
 
       document.querySelector('#profileHome').classList.remove('hide');
       document.querySelector('#setFirstDeadline').classList.add('hide');
   }
 
-  // var database = firebase.database();
-  // var lanternListRef = database.ref('LanternList');
-  //
-  // lanternListRef.on('child_added', function(snapshot) {
-  //   var data = snapshot.val();
-  //   that.lanternList.push(data);
-  //   console.log('lanternList array' + that.lanternList);
-  //   that.update();
-  // });
-
-  // Object.values(x) <-- throw in the object
 
 	this.on('update', function(event){
 	  this.lanternList = this.opts.lanterns;
@@ -245,14 +215,14 @@
 
     button {
       font-family: work sans;
-      font-weight: 400;
+      font-weight: 500;
       color: #2C3440;
       background: #C9C9C9;
       border-radius: 10px;
       border: none;
-      padding: 3px;
       padding-left: 10px;
       padding-right: 10px;
+      font-size: 15px;
     }
 
     button.basic:hover {
@@ -267,9 +237,61 @@
       padding-right: 10px;
     }
 
+    .plusBtn {
+      max-width: 30px;
+      margin-bottom: 10px;
+      margin-left:310px;
+    }
+
+    .nextBtn {
+      margin-left: 250px;
+    }
+
     .hide {
       display: none;
     }
+
+    .formLantern {
+      width: 200px;
+      margin-left: 80px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      color: #485860;
+      font-family: work sans;
+      background-color: #3AC8C6;
+      font-weight: 500;
+      font-size: 22px;
+      text-align: center;
+      max-width: 375px;
+      padding: 15px;
+    }
+
+    .submessage {
+      color: #C9C9C9;
+      font-family: work sans;
+      font-size: 22px;
+      text-align: center;
+      font-weight: 300;
+      padding: 10px;
+    }
+
+    input {
+      color: #C9C9C9;
+      background-color: transparent;
+      border: #C9C9C9 3px solid;
+      padding: 10px;
+      margin-bottom: 25px;
+      font-size: 16px;
+      font-family: work sans;
+      text-align: center;
+      margin-left: 40px;
+      width: 300px;
+    }
+
+
 
 
     /*COLORS:

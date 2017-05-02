@@ -36,21 +36,23 @@
 			openRef.set(false);
     }
 
+    var stepsDone;
+
 		updateSteps(event){
 			var stepsRef = firebase.database().ref('LanternList/' + this.id + '/steps');
 			var step = event.item.step;
 			step.done = !step.done;
-			console.log('stepsAry', this.steps);
+			// console.log('stepsAry', this.steps);
 			stepsRef.set(this.steps);
-		}
-
+      that.update();
+    };
 
     deleteLantern() {
       if (confirm("Are you sure you want to delete this lantern?")) {
-        var lanternRef = firebase.database().ref('LanternList/' +this.id);
+        var lanternRef = firebase.database().ref('LanternList/' + this.id);
         lanternRef.set(null);
         that.update();
-    }}
+    }};
 
 
 
