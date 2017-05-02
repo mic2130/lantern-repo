@@ -30,45 +30,42 @@
   <p class="submessage">What is your long-term goal?</p>
   <input ref="goal" class="lanternInput" class="input" type="text" placeholder="You Goal Here" onkeypress={ addLantern }>
   <br>
-  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
-  <button type="button" name="button" onclick={ goToSetDeadline }>next</button>
+  <button type="button" name="cancel" onclick={ parent.cancelCreateLantern}>back</button>
+  <button class="nextBtn" type="button" name="button" class="nextBtn" onclick={ goToSetDeadline }>next</button>
 </div>
 
 <!-- DEADLINE -->
 <div id="setDeadline" class="hide">
-  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
-  <p class="message">Congratualations for your lanterns! Let's set a deadline for it.</p>
+  <p class="message">That sounds like a great goal! Let's set a deadline for it.</p>
   <img class="formLantern" src="../img/formLantern.png">
-  <p>When do you want this goal to come true?</p>
+  <p class="submessage">What will be the deadline?</p>
   <input ref="deadline" class="lanternDateInput" type="date" name="deadline" value="yyyy-MM-dd">
   <button type="button" name="back" onclick={ backToSetGoal }>back</button>
-  <button type="button" name="next" onclick={ goToSetSteps }>next</button>
+  <button class="nextBtn" type="button" name="next" onclick={ goToSetSteps }>next</button>
 </div>
 
 <!-- STEPS -->
 <div id="setSteps" class="hide">
-  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
-  <p>One small steps at a time. Let's break it out!</p>
-  <p>What small concrete steps do you want to make this goal come true?</p>
+  <p class="message">One small step at a time. Let's break it out!</p>
+  <p class="submessage">What small concrete steps do you want to make this goal come true?</p>
   <div>
-    <p>Steps</p>
+    <p class="submessage" style="text-align: left; font-size: 18px; margin-left: 5px;">Steps:</p>
     <!-- step-input tags -->
       <step-input each={ stepObjects } opts={ data }></step-input>
     <!-- button that creates step-input tags -->
-    <img type="button" src="../img/plus.png" alt="Plus another task" onclick={ makeStepObject }>
+    <img type="button" src="../img/plus.png" class="plusBtn" onclick={ makeStepObject }>
   </div>
   <button type="button" name="back" onclick={ backToSetDeadline }>back</button>
-  <button type="button" name="next" onclick={ goToSetFirstDeadline }>next</button>
+  <button type="button" name="next" class="nextBtn" onclick={ goToSetFirstDeadline }>next</button>
 </div>
 
 <div id="setFirstDeadline" class="hide">
-  <h2>When do you want to complete your first step by?</h2>
-  <h3>Your first step:</h3>
-  <p>{ firstStep }</p>
-  <input ref="firstStepDeadline" class="firstStepDeadlineInput" type="date" name="deadline" value="yyyy-MM-dd">
-  <button type="button" name="cancel" onclick={ cancelCreateLantern}>cancel</button>
+  <p class="message">When do you want to complete your first step by?</p>
+  <p class="submessage" style="margin-top: 50px;">Your first step:</p>
+  <p class="submessage" style="color: #FFD700;">{ firstStep }</p>
+  <input style="margin-bottom: 60px; margin-top: 30px;" ref="firstStepDeadline" class="firstStepDeadlineInput" type="date" name="deadline" value="yyyy-MM-dd">
   <button type="button" name="back" onclick={ backToSetSteps }>back</button>
-  <button type="button" name="button" onclick={ completeLantern }>Complete my Lantern!</button>
+  <button type="button" name="button" onclick={ completeLantern } style="margin-left: 115px;">Complete my Lantern!</button>
 </div>
 
 </div>
@@ -238,6 +235,16 @@
       padding: 3px;
       padding-left: 10px;
       padding-right: 10px;
+    }
+
+    .plusBtn {
+      max-width: 30px;
+      margin-bottom: 10px;
+      margin-left:310px;
+    }
+
+    .nextBtn {
+      margin-left: 250px;
     }
 
     .hide {
