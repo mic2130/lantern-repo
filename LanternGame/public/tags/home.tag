@@ -107,6 +107,7 @@
             margin-left: 450px;
             padding-right: 150px;
             padding-top: 8%;
+            z-index: 0;
         }
         .lanternItem {
             flex-grow: 1;

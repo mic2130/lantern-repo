@@ -1,17 +1,17 @@
 <auth>
-
-    <button if={ !user } class="btn btn-warning" onClick={ logIn }>Log In</button>
-    <button if={ user } class="btn btn-success" onClick={ logOut }>Log Out</button>
-    <button if={ user } show={!showSocial} class="btn btn-info" onClick={ goToSocial }>See Others Lantern</button>
-    <button if={ user } show={showSocial} class="btn btn-info" onClick={ goToPrivate }>Back to Private</button>
-
+    <div class="buttons">
+        <button if={ !user } class="btn btn-warning" onClick={ logIn }>Log In</button>
+        <button if={ user } class="btn btn-success" onClick={ logOut }>Log Out</button>
+        <button if={ user } show={!showSocial} class="btn btn-info" onClick={ goToSocial }>See Others Lantern</button>
+        <button if={ user } show={showSocial} class="btn btn-info" onClick={ goToPrivate }>Back to Private</button>
+    </div>
     <public-social if={!user}></public-social>
     <home if={user} show={!showSocial}></home>
     <private-social if={user} show={showSocial}></private-social>
 
     <script>
         var that = this;
-        this.showSocial=false;
+        this.showSocial = false;
         // this.user = firebase.auth().currentUser;
         firebase.auth().onAuthStateChanged(function (userObj) {
             if (userObj) {
@@ -22,17 +22,21 @@
             // that.user = firebase.auth().currentUser;
             that.update();
         });
-        var user, name, email, photoUrl, uid;
-        if(user != null){
-          name =user.displayName;
-          email = user.email;
-          photoUrl=user.photoURL;
-          uid=user.uid;
+        var user,
+            name,
+            email,
+            photoUrl,
+            uid;
+        if (user != null) {
+            name = user.displayName;
+            email = user.email;
+            photoUrl = user.photoURL;
+            uid = user.uid;
         }
 
         logIn(event) {
             var provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider).then(function(result) {
+            firebase.auth().signInWithPopup(provider).then(function (result) {
                 user = result.user;
             }).catch(function (error) {
                 console.log('Error:', error.code, error.message);
@@ -46,15 +50,15 @@
             that.update;
         }
 
-        this.on('update', function(event) {
+        this.on('update', function (event) {
             console.log('auth.tag upadte');
         });
 
-        goToSocial(event){
-          this.showSocial=true;
+        goToSocial(event) {
+            this.showSocial = true;
         }
-        goToPrivate(event){
-          this.showSocial=false;
+        goToPrivate(event) {
+            this.showSocial = false;
         }
     </script>
     <style>
@@ -76,6 +80,12 @@
             margin-right: 2vw;
             margin-top: 2vh;
         }
+        .buttons{
+          position:fixed;
+          top:1%;
+          right:1%;
+          z-index: 99;
+            }
 
     </style>
 
