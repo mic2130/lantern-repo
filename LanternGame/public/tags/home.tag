@@ -53,6 +53,18 @@
             that.update();
         });
 
+        this.cancelCreateLantern = function () {
+           this.profileHome=true;
+           this.setGoal=false;
+           this.setDeadline=false;
+           this.setSteps=false;
+           this.setFirstDeadline=false;
+           this.refs.goal.value="";
+           this.refs.deadline.value="yyyy-MM-dd";
+           this.refs.firstStepDeadline.value="yyyy-MM-dd";
+           this.stepObjects = [{}, {}, {}];
+        }
+
         // this.donePercent = 0; this.donePercent = numDone / this.tasks.length;
         //
         // this.lanternSteps = []; var database = firebase.database(); this.lanterListSteps = database.ref(LanternList/key/steps);

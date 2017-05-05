@@ -2,9 +2,7 @@
     <div class="lantern hvr-bounce-in " style="left:{leftVal}%; bottom:{ bottomVal }%">
         <span class="tooltiptext">
           <strong>{userName}'s Lantern:</strong><br>
-            <strong>Goal:</strong><br>
-            {goal}
-            <strong>Deadline:</strong><br>
+            {goal}<br>
             {deadline}
         </span>
 
@@ -55,29 +53,25 @@
                 background: url("../img/lanternB.png");
             }
         }
-        .lantern .tooltiptext {
-            visibility: hidden;
-            opacity: 0.7;
-            height: 200vw;
-            background: url("../img/dialogue.png");
+        .lantern:hover .tooltiptext {
+            visibility: visible;
+            width:6vw;
+            height:50vh;
+            background: url("../img/shiningLight.png");
             background-size: 100% 100%;
             background-repeat: no-repeat;
             color: white;
-            font-size: 0.1vw;
+            font-size:0.1vw;
             text-align: center;
             border-radius: 6px;
-            margin: 2vw;
-            margin-top:15vh;
-
-            /* Position the tooltip */
-            position: absolute;
+            position: fixed;
+            display: block;
+            margin: 3vw;
+            margin-top:21vh;
             z-index: 1;
         }
-        div {
-            padding: 0;
-        }
-        .lantern:hover .tooltiptext {
-            visibility: visible;
+        .lantern .tooltiptext {
+            visibility: hidden;
         }
 
     </style>

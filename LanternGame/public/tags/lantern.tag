@@ -60,6 +60,10 @@
 
 
   <style>
+  :scope{
+    overflow:hidden;
+
+  }
 
     h2 {
       font-family: work sans;

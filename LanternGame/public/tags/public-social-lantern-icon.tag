@@ -1,11 +1,14 @@
 <public-social-lantern-icon>
 
-    <div class="lantern hvr-bounce-in " style="left:{leftVal}%; bottom:{ bottomVal }%">
-        <span class="tooltiptext" >
-            <strong>Goal:</strong><br> {goal}
-        </span>
+  <div class="lanternDiv">
 
+    <div class="lantern hvr-bounce-in " style="left:{leftVal}%; bottom:{ bottomVal }%">
+      <div class="tooltiptext" >
+          {goal}
+      </div>
     </div>
+  </div>
+
 
     <script>
     this.user = firebase.auth().currentUser;
@@ -38,6 +41,11 @@
             box-shadow: 0 0 1px transparent;
             -webkit-transition-duration: 0.5s;
             transition-duration: 0.5s;
+            display:flex;
+            align-items:flex-end;
+            min-height: 100%;
+            position: relative;
+
         }
         @-webkit-keyframes lantern {
             0% {
@@ -53,36 +61,42 @@
                 background: url("../img/lanternB.png");
             }
         }
-        .lantern .tooltiptext {
-            visibility: hidden;
-            opacity:0.7;
-            height:200vw;
-            background: -webkit-linear-gradient(top, #ffd170, rgba(255,0,0,1)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom, #ffd170, rgba(255,0,0,1)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom, #ffd170, rgba(255,0,0,1)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom, #ffd170, rgba(255,0,0,1)); /* Standard syntax (must be last) */
+        /*.lantern .tooltiptext{
+          display:none;
+        }*/
+        /*.lantern:hover .tooltiptext{
+          display:block;
+          position:fixed;
+          overflow:hidden;
+          background: url("../img/bggg.png");
+          color:white;
+          margin: 4vw;
+          margin-top:15vh;
+
+        }*/
+        .lantern:hover .tooltiptext {
+            visibility: visible;
+            width:6vw;
+            height:50vh;
+            background: url("../img/shiningLight.png");
             background-size: 100% 100%;
             background-repeat: no-repeat;
             color: white;
             font-size:0.1vw;
             text-align: center;
             border-radius: 6px;
-            position: absolute;
-            display: inline;
-            margin: 4vw;
-            margin-top:15vh;
-
-
-
-            /* Position the tooltip */
-            position: absolute;
+            position: fixed;
+            display: block;
+            margin: 3vw;
+            margin-top:21vh;
             z-index: 1;
+
         }
-        div{
-          padding:0;
+        .lantern .tooltiptext {
+            visibility: hidden;
         }
-        .lantern:hover .tooltiptext {
-            visibility: visible;
+        .lanternDiv{
+
         }
 
     </style>

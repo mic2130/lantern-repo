@@ -30,7 +30,7 @@
   <p class="submessage">What is your long-term goal?</p>
   <input ref="goal" class="lanternInput" class="input" type="text" placeholder="You Goal Here" onkeypress={ addLantern }>
   <br>
-  <button type="button" name="cancel" onclick={ cancelCreateLantern}>back</button>
+  <button type="button" name="cancel" onclick={ parent.cancelCreateLantern}>back</button>
   <button class="nextBtn" type="button" name="button" class="nextBtn" onclick={ goToSetDeadline }>next</button>
 </div>
 
@@ -143,17 +143,7 @@
       this.setFirstDeadline=false;
     }
 
-    this.cancelCreateLantern = function () {
-      this.profileHome=true;
-      this.setGoal=false;
-      this.setDeadline=false;
-      this.setSteps=false;
-      this.setFirstDeadline=false;
-      this.refs.goal.value="";
-      this.refs.deadline.value="yyyy-MM-dd";
-      this.refs.firstStepDeadline.value="yyyy-MM-dd";
-        that.stepObjects = [{}, {}, {}];
-    }
+
 
     // database.ref(). = userProfileData
 
@@ -232,6 +222,7 @@
 
     .userProfile {
       padding: 30px;
+      overflow:hidden;
     }
 
     p {
