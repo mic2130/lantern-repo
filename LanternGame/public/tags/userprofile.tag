@@ -1,4 +1,4 @@
-<user-profile>
+<userprofile>
 
 <div class="userProfile">
 
@@ -370,4 +370,4 @@
 
 
 
-</user-profile>
+</userprofile>
