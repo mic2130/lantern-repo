@@ -24,35 +24,35 @@
 
 
   <script>
-    var that = this;
-    // var goal = this.parent.lanternList;
+  var that = this;
+  // var goal = this.parent.lanternList;
+  this.user=firebase.auth().currentUser;
 
-    this.showDetails = function() {
-			var openRef = firebase.database().ref('LanternList/' + this.id + '/listShown');
-			openRef.set(true);
-    }
-    this.hideDetails = function(){
-			var openRef = firebase.database().ref('LanternList/' + this.id + '/listShown');
-			openRef.set(false);
-    }
+  this.showDetails = function() {
+    var openRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/listShown');
+    openRef.set(true);
+    console.log(this.id);
+  }
+  this.hideDetails = function(){
+    var openRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/listShown');
+    openRef.set(false);
+  }
 
-    var stepsDone;
+  updateSteps(event){
+    var stepsRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/steps');
+    var step = event.item.step;
+    step.done = !step.done;
+    console.log('stepsAry', this.steps);
+    stepsRef.set(this.steps);
+  }
 
-		updateSteps(event){
-			var stepsRef = firebase.database().ref('LanternList/' + this.id + '/steps');
-			var step = event.item.step;
-			step.done = !step.done;
-			// console.log('stepsAry', this.steps);
-			stepsRef.set(this.steps);
+
+  deleteLantern() {
+    if (confirm("Are you sure you want to delete this lantern?")) {
+      var lanternRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID);
+      lanternRef.set(null);
       that.update();
-    };
-
-    deleteLantern() {
-      if (confirm("Are you sure you want to delete this lantern?")) {
-        var lanternRef = firebase.database().ref('LanternList/' + this.id);
-        lanternRef.set(null);
-        that.update();
-    }};
+  }}
 
 
 
@@ -60,6 +60,10 @@
 
 
   <style>
+  :scope{
+    overflow:hidden;
+
+  }
 
     h2 {
       font-family: work sans;

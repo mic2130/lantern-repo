@@ -8,10 +8,10 @@
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #C9C9C9;" onclick={ showSidebar }></span>
 
     <div show={ sidebarShown } class="sidebar">
-      <div onclick={ cancelCreateLantern }>
-        <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
-      </div>
-      <user-profile lanterns={ lanternList }></user-profile>
+        <div onclick={ cancelCreateLantern }>
+            <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
+        </div>
+        <user-profile lanterns={ lanternList }></user-profile>
     </div>
 
     <div class="container">
@@ -21,23 +21,27 @@
     <script>
         var that = this;
 
-        // SIDEBAR
+        console.log("test home", this);
+
         this.sidebarShown = true;
+
         this.hideSidebar = function () {
             that.sidebarShown = false;
         }
+
         this.showSidebar = function () {
             that.sidebarShown = true;
             that.update();
             console.log(that.sidebarShown);
         }
 
-        // firebase shortcut
-        var database = firebase.database();
+        this.user = firebase.auth().currentUser;
+        var database = firebase.database() //shortcut to the firebase
+        var lanternListRef = database.ref('userLanternList/' + this.user.uid);
 
-        // LANTERNLIST data from Firebase to create lantern icons
-        var lanternListRef = database.ref('LanternList');
         this.lanternList = [];
+
+        // var lanternListRef = database.ref('userList'); get lanternList data from Firebase
         lanternListRef.on('value', function (snapshot) {
             var data = snapshot.val();
             var lanternsArray = [];
@@ -45,23 +49,21 @@
                 lanternsArray.push(data[key]);
             }
             that.lanternList = lanternsArray;
+            console.log('this.lanternList', that.lanternList);
             that.update();
         });
 
-        this.cancelCreateLantern = function(){
-          document.querySelector('#profileHome').classList.remove('hide');
-          document.querySelector('#setGoal').classList.add('hide');
-          document.querySelector('#setDeadline').classList.add('hide');
-          document.querySelector('#setSteps').classList.add('hide');
-          document.querySelector('#setFirstDeadline').classList.add('hide');
-          document.querySelector('.lanternInput').value = "";
-          document.querySelector('.lanternDateInput').value = "yyyy-MM-dd";
-          document.querySelector('.firstStepDeadlineInput').value = "yyyy-MM-dd";
-          that.stepObjects = [{},{},{}];
+        this.cancelCreateLantern = function () {
+           this.profileHome=true;
+           this.setGoal=false;
+           this.setDeadline=false;
+           this.setSteps=false;
+           this.setFirstDeadline=false;
+           this.refs.goal.value="";
+           this.refs.deadline.value="yyyy-MM-dd";
+           this.refs.firstStepDeadline.value="yyyy-MM-dd";
+           this.stepObjects = [{}, {}, {}];
         }
-
-
-
 
         // this.donePercent = 0; this.donePercent = numDone / this.tasks.length;
         //
@@ -70,18 +72,18 @@
 
     <style>
 
+        /*bg has defined in auth page*/
         :scope {
             position: fixed;
             width: 100%;
             height: 100%;
             left: 0;
             top: 0;
-            z-index: 0;
-            background: url("../img/bg.jpg");
+            /*background: url("../img/bg.jpg");
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-size: cover;
+            background-size: cover;*/
         }
 
         .sidebar {
@@ -111,15 +113,14 @@
             left: 25px;
             font-size: 32px;
         }
-
         .container {
             display: flex;
             height: 80%;
-            margin-right: 0;
             margin-left: 450px;
+            padding-right: 150px;
             padding-top: 8%;
+            z-index: 0;
         }
-
         .lanternItem {
             flex-grow: 1;
         }

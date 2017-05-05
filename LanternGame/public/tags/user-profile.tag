@@ -2,29 +2,29 @@
 
 <div class="userProfile">
 
-<div id="profileHome">
-  <div class="userProfileSection">
-    <img src={ userProfileData.picture }/>
-    <h2>{ userProfileData.name }</h2>
-    <hr class="line1">
-  </div>
+  <div show={profileHome} id="profileHome">
+      <div class="userProfileSection">
+          <img style="width:20%" src={ user.photoURL }/>
+        <h2>  <strong>Hello,&nbsp</strong>{user.displayName}</h2>
+          <hr class="line1">
+      </div>
 
 
-<div>
-  <h4>Lanterns</h4>
-  <hr class="line2">
+      <div>
+          <h4>Lanterns</h4>
+          <hr class="line2">
 
-  <!--TAG lantern here-->
-  <lantern each={ lanternList }></lantern>
-  <button class="basic" type="button" name="createLanternButton" onclick={ createLantern }>Create a new lantern</button>
+          <!--TAG lantern here-->
+          <lantern each={ lanternList }></lantern>
+          <button class="basic" type="button" name="createLanternButton" onclick={ createLantern }>Create a new lantern</button>
 
-</div>
-</div>
+      </div>
+      </div>
 
 <!-- SECTION create Lanterns  -->
 
 <!-- GOAL -->
-<div id="setGoal" class="hide">
+<div show={setGoal}>
   <p class="message">Let's start lighting the way to achieve your goal.</p>
   <img class="formLantern" src="../img/formLantern.png">
   <p class="submessage">What is your long-term goal?</p>
@@ -35,7 +35,7 @@
 </div>
 
 <!-- DEADLINE -->
-<div id="setDeadline" class="hide">
+<div show={setDeadline}>
   <p class="message">That sounds like a great goal! Let's set a deadline for it.</p>
   <img class="formLantern" src="../img/formLantern.png">
   <p class="submessage">What will be the deadline?</p>
@@ -45,7 +45,7 @@
 </div>
 
 <!-- STEPS -->
-<div id="setSteps" class="hide">
+<div show={setSteps}>
   <p class="message">One small step at a time. Let's break it out!</p>
   <p class="submessage">What small concrete steps do you want to make this goal come true?</p>
   <div>
@@ -59,7 +59,7 @@
   <button type="button" name="next" class="nextBtn" onclick={ goToSetFirstDeadline }>next</button>
 </div>
 
-<div id="setFirstDeadline" class="hide">
+<div show={setFirstDeadline}>
   <p class="message">When do you want to complete your first step by?</p>
   <p class="submessage" style="margin-top: 50px;">Your first step:</p>
   <p class="submessage" style="color: #FFD700;">{ firstStep }</p>
@@ -74,6 +74,14 @@
 
   <script>
     var that = this;
+    this.user = firebase.auth().currentUser;
+
+    this.profileHome=true;
+    this.setGoal=false;
+    this.setDeadline=false;
+    this.setDeadline=false;
+    this.setFirstDeadline=false;
+
 
 		this.lanternList = this.opts.lanterns;
 
@@ -96,44 +104,48 @@
       picture: "http://placehold.it/50x50"
     };
 
-    this.createLantern = function() {
-      document.querySelector('#profileHome').classList.add('hide');
-      document.querySelector('#setGoal').classList.remove('hide');
+    this.createLantern = function () {
+        this.profileHome=false;
+        this.setGoal=true;
     }
 
-    this.goToSetDeadline = function() {
-      document.querySelector('#setGoal').classList.add('hide');
-      document.querySelector('#setDeadline').classList.remove('hide');
+    this.goToSetDeadline = function () {
+      this.setGoal=false;
+      this.setDeadline=true;
+
     }
 
-    this.goToSetSteps = function() {
-      document.querySelector('#setDeadline').classList.add('hide');
-      document.querySelector('#setSteps').classList.remove('hide');
+    this.goToSetSteps = function () {
+      this.setDeadline=false;
+      this.setSteps=true;
     }
 
     var firstStep;
 
-    this.goToSetFirstDeadline = function() {
-      document.querySelector('#setSteps').classList.add('hide');
-      document.querySelector('#setFirstDeadline').classList.remove('hide');
-      that.firstStep = that.stepObjects[0].step;
+    this.goToSetFirstDeadline = function () {
+      this.setSteps=false;
+      this.setFirstDeadline=true;
+        that.firstStep = that.stepObjects[0].step;
     }
 
-    this.backToSetGoal = function() {
-      document.querySelector('#setGoal').classList.remove('hide');
-      document.querySelector('#setDeadline').classList.add('hide');
+    this.backToSetGoal = function () {
+      this.setGoal=true;
+      this.setDeadline=false;
     }
 
-    this.backToSetDeadline = function() {
-      document.querySelector('#setDeadline').classList.remove('hide');
-      document.querySelector('#setSteps').classList.add('hide');
+    this.backToSetDeadline = function () {
+      this.setDeadline=true;
+      this.setSteps=false;
     }
 
-    this.backToSetSteps = function() {
-      document.querySelector('#setSteps').classList.remove('hide');
-      document.querySelector('#setFirstDeadline').classList.add('hide');
+    this.backToSetSteps = function () {
+      this.setSteps=true;
+      this.setFirstDeadline=false;
     }
 
+
+
+    // database.ref(). = userProfileData
 
     this.lanternListData = [];
     this.stepList = [];
@@ -145,24 +157,57 @@
     // }
 
 
-  completeLantern(){
-    var newLantern = {};
-      newLantern.goal = that.refs.goal.value; //grab the user goal value
-      newLantern.done = false;
-      newLantern.deadline = that.refs.deadline.value;
-      newLantern.steps = that.stepObjects;
-      newLantern.nextStep = that.refs.firstStepDeadline.value;
-
-      var database = firebase.database(); //shortcut to the firebase
-      var lanternListRef = database.ref('LanternList');
-      var newKey = lanternListRef.push().key;
-      newLantern.id = newKey;
-      lanternListRef.child(newKey).set(newLantern);
+    completeLantern() {
 
 
-      document.querySelector('#profileHome').classList.remove('hide');
-      document.querySelector('#setFirstDeadline').classList.add('hide');
-  }
+        // that.stepList.push(that.opts.data); that.update();
+        var newLantern = {};
+        newLantern.goal = that.refs.goal.value; //grab the user goal value
+        newLantern.done = false;
+        newLantern.deadline = that.refs.deadline.value;
+        newLantern.steps = that.stepObjects;
+        newLantern.nextStep = that.refs.firstStepDeadline.value;
+        newLantern.listShown=false;
+        newLantern.userID=this.user.uid;
+        console.log(newLantern);
+
+        var database = firebase.database() //shortcut to the firebase
+        var userLanternListRef = database.ref('userLanternList/'+ this.user.uid);
+        var newKey = userLanternListRef.push().key;
+        newLantern.lanternID = newKey;
+        userLanternListRef.child(newKey).set(newLantern);
+
+        //read only goal/lantern id to publicLanternList
+        var newPublicLantern={};
+        newPublicLantern.goal=that.refs.goal.value;
+        newPublicLantern.lanternID=newKey;
+        var publicLanternListRef=database.ref('publicLanternList');
+        publicLanternListRef.child(newKey).set(newPublicLantern);
+
+        //read goal/deadline/userName
+        var newUserPublicLantern={};
+        newUserPublicLantern.goal=that.refs.goal.value;
+        newUserPublicLantern.deadline=that.refs.deadline.value;
+        newUserPublicLantern.userID=this.user.uid;
+        newUserPublicLantern.userName=this.user.displayName;
+        newUserPublicLantern.lanternID=newKey;
+        var userPublicLanternListRef=database.ref('userPublicLanternList');
+        userPublicLanternListRef.child(newKey).set(newUserPublicLantern);
+
+
+        //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
+        this.profileHome=true;
+        this.setFirstDeadline=false;
+        this.profileHome=true;
+        this.setGoal=false;
+        this.setDeadline=false;
+        this.setSteps=false;
+        this.setFirstDeadline=false;
+        this.refs.goal.value="";
+        this.refs.deadline.value="yyyy-MM-dd";
+        this.refs.firstStepDeadline.value="yyyy-MM-dd";
+        that.stepObjects = [{}, {}, {}];
+    }
 
 
 	this.on('update', function(event){
@@ -177,6 +222,7 @@
 
     .userProfile {
       padding: 30px;
+      overflow:hidden;
     }
 
     p {
