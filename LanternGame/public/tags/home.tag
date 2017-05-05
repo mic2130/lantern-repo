@@ -1,17 +1,12 @@
 <home>
 
-    <!-- <button style="float:right; margin-right:150px" type="button" onclick={ hideSidebar }>Hide</button>
-    <button style="float:right; margin-right:10px" type="button" onclick={ showSidebar }>Show</button> -->
-
-    <!-- <sidebar show={ sidebarShown } lanterns={ lanternList }></sidebar> -->
-
     <span class="glyphicon glyphicon-menu-hamburger" style="color: #C9C9C9;" onclick={ showSidebar }></span>
 
     <div show={ sidebarShown } class="sidebar">
         <div onclick={ cancelCreateLantern }>
             <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
         </div>
-        <user-profile lanterns={ lanternList }></user-profile>
+        <userprofile lanterns={ lanternList }></userprofile>
     </div>
 
     <div class="container">
@@ -20,8 +15,6 @@
 
     <script>
         var that = this;
-
-        console.log("test home", this);
 
         this.sidebarShown = true;
 
@@ -32,7 +25,6 @@
         this.showSidebar = function () {
             that.sidebarShown = true;
             that.update();
-            console.log(that.sidebarShown);
         }
 
         this.user = firebase.auth().currentUser;
@@ -49,20 +41,20 @@
                 lanternsArray.push(data[key]);
             }
             that.lanternList = lanternsArray;
-            console.log('this.lanternList', that.lanternList);
             that.update();
         });
 
         this.cancelCreateLantern = function () {
-           this.profileHome=true;
-           this.setGoal=false;
-           this.setDeadline=false;
-           this.setSteps=false;
-           this.setFirstDeadline=false;
-           this.refs.goal.value="";
-           this.refs.deadline.value="yyyy-MM-dd";
-           this.refs.firstStepDeadline.value="yyyy-MM-dd";
-           this.stepObjects = [{}, {}, {}];
+          //  this.profileHome=true;
+          //  this.setGoal=false;
+          //  this.setDeadline=false;
+          //  this.setSteps=false;
+          //  this.setFirstDeadline=false;
+          //  this.refs.goal.value="";
+          //  this.refs.deadline.value="yyyy-MM-dd";
+          //  this.refs.firstStepDeadline.value="yyyy-MM-dd";
+          //  this.stepObjects = [{}, {}, {}];
+           console.log(this);
         }
 
         // this.donePercent = 0; this.donePercent = numDone / this.tasks.length;
