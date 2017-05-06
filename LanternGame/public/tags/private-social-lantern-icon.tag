@@ -10,8 +10,8 @@
 
     <script>
         console.log("private-social-lantern-icon.tag");
-        this.leftVal = Math.floor(Math.random() * 95);
-        this.bottomVal = Math.floor(Math.random() * 80);
+        this.leftVal = Math.floor(Math.random() * 81 + 10);
+        this.bottomVal = Math.floor(Math.random() * 61 + 20);
     </script>
 
     <style>

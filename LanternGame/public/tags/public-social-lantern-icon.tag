@@ -11,8 +11,8 @@
     <script>
     this.user = firebase.auth().currentUser;
         console.log("public-lantern-icon.tag");
-        this.leftVal = Math.floor(Math.random() * 95);
-        this.bottomVal = Math.floor(Math.random() * 80);
+        this.leftVal = Math.floor(Math.random() * 81 + 10);
+        this.bottomVal = Math.floor(Math.random() * 61 + 20);
     </script>
 
     <style>
@@ -54,13 +54,13 @@
         background-size: 100% 100%;
         background-repeat: no-repeat;
         color: white;
-        font-size:0.1vw;
+        font-size:1vw;
         text-align: center;
         border-radius: 6px;
         position: fixed;
         display: block;
-        margin: 3vw;
-        margin-top:21vh;
+        margin: 2.5vw;
+        margin-top:20vh;
         z-index: 1;
     }
     .lantern .tooltiptext {
