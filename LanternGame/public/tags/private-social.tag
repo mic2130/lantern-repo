@@ -25,7 +25,7 @@
   // var lanternListRef = database.ref('userList');
   // get lanternList data from Firebase
 
-  userPublicLanternListRef.on('value', function (snapshot) {
+  userPublicLanternListRef.limitToFirst(15).on('value', function (snapshot) {
     var data = snapshot.val();
     var lanternsArray = [];
     for (var key in data) {
