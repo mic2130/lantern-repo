@@ -82,7 +82,6 @@
     this.setDeadline=false;
     this.setFirstDeadline=false;
 
-
 		this.lanternList = this.opts.lanterns;
 
     // `this.steps = [{...},{...},{...}];` // Start with three step objects. Each time the button is pushed, create a `stepObject` and `push()` it to the `this.steps` array. Your template will use the `each` special attribute.  `<step-input each={ steps }></step-input>`.
@@ -98,12 +97,6 @@
       that.stepObjects.push(x);
     };
 
-
-    this.userProfileData = {
-      name: "Fiore",
-      picture: "http://placehold.it/50x50"
-    };
-
     this.createLantern = function () {
         this.profileHome=false;
         this.setGoal=true;
@@ -112,7 +105,6 @@
     this.goToSetDeadline = function () {
       this.setGoal=false;
       this.setDeadline=true;
-
     }
 
     this.goToSetSteps = function () {
@@ -144,22 +136,11 @@
     }
 
 
-
-    // database.ref(). = userProfileData
-
     this.lanternListData = [];
     this.stepList = [];
 
 
-// IN CASE WE WANT TO SAVE STEPS BEFORE SAVING LANTERN
-    // saveSteps() {
-    //   ref('lantern/-key/steps').set(stepObjects);
-    // }
-
-
     completeLantern() {
-
-
         // that.stepList.push(that.opts.data); that.update();
         var newLantern = {};
         newLantern.goal = that.refs.goal.value; //grab the user goal value
@@ -169,21 +150,17 @@
         newLantern.nextStep = that.refs.firstStepDeadline.value;
         newLantern.listShown=false;
         newLantern.userID=this.user.uid;
-        console.log(newLantern);
-
         var database = firebase.database() //shortcut to the firebase
         var userLanternListRef = database.ref('userLanternList/'+ this.user.uid);
         var newKey = userLanternListRef.push().key;
         newLantern.lanternID = newKey;
         userLanternListRef.child(newKey).set(newLantern);
-
         //read only goal/lantern id to publicLanternList
         var newPublicLantern={};
         newPublicLantern.goal=that.refs.goal.value;
         newPublicLantern.lanternID=newKey;
         var publicLanternListRef=database.ref('publicLanternList');
         publicLanternListRef.child(newKey).set(newPublicLantern);
-
         //read goal/deadline/userName
         var newUserPublicLantern={};
         newUserPublicLantern.goal=that.refs.goal.value;
@@ -193,8 +170,6 @@
         newUserPublicLantern.lanternID=newKey;
         var userPublicLanternListRef=database.ref('userPublicLanternList');
         userPublicLanternListRef.child(newKey).set(newUserPublicLantern);
-
-
         //another way of write the last line: database.ref('x/' + newKey).set(newLantern);
         this.profileHome=true;
         this.setFirstDeadline=false;
@@ -208,7 +183,6 @@
         this.refs.firstStepDeadline.value="yyyy-MM-dd";
         that.stepObjects = [{}, {}, {}];
     }
-
 
 	this.on('update', function(event){
 	  this.lanternList = this.opts.lanterns;
@@ -337,9 +311,6 @@
       width: 300px;
     }
 
-
-
-
     /*COLORS:
     Font Creme: #C9C9C9
     Font light gray: #C9C9C9
@@ -356,18 +327,7 @@
     Light: 200 (inside input boxes)
     */
 
-    /*notes styles */
-    p.notes {
-      color: magenta;
-      font-size: 10px;
-      font-family: courier;
-    }
-
 
   </style>
-
-
-
-
 
 </userprofile>

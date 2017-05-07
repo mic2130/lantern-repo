@@ -1,6 +1,5 @@
 <lantern>
 
-
 <div>
 
   <div class="container2">
@@ -13,9 +12,10 @@
 
   <div show={ listShown }>
     <br>
-    <p><strong>Deadline:</strong> { deadline }</p>
-    <p><strong>Steps:</strong></p>
+    <p class="circle">{ daysLeft }<br>DAYS</p>
+    <p style="font-weight:600;">Steps:</p>
     <step each={ step, i in steps }></step>
+    <p style="font-weight:600;">Deadline: <span>{ deadline }</span></p>
     <button type="button" onclick={ deleteLantern }>Delete Lantern</button>
   </div>
 
@@ -25,13 +25,28 @@
 
   <script>
   var that = this;
-  // var goal = this.parent.lanternList;
+  var daysLeft;
   this.user=firebase.auth().currentUser;
+
+  var deadlineRef = firebase.database().ref('userLanternList/' + this.userID + '/' + this.lanternID + '/deadline');
+  var deadline;
+  var days;
+  var daysToday;
+  var daysLeft;
+
+  deadlineRef.on('value', function (snapshot) {
+      var deadlineFB = snapshot.val();
+      that.update();
+      that.deadline = deadlineFB;
+      that.daysDL = ((Date.parse(that.deadline))/(1000*60*60*24));
+      that.daysToday = ((Date.now())/(1000*60*60*24));
+      that.daysLeft = Math.ceil(that.daysDL - that.daysToday);
+  });
+
 
   this.showDetails = function() {
     var openRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/listShown');
     openRef.set(true);
-    console.log(this.id);
   }
   this.hideDetails = function(){
     var openRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/listShown');
@@ -42,17 +57,23 @@
     var stepsRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/steps');
     var step = event.item.step;
     step.done = !step.done;
-    console.log('stepsAry', this.steps);
     stepsRef.set(this.steps);
   }
 
+  this.deleteRefThree = function() {
+    var lanternRefThree = firebase.database().ref('userPublicLanternList/' + this.lanternID);
+    lanternRefThree.set(null);
+  }
 
   deleteLantern() {
     if (confirm("Are you sure you want to delete this lantern?")) {
-      var lanternRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID);
+      var lanternRef = firebase.database().ref('userLanternList/' + that.user.uid + "/" + this.lanternID);
       lanternRef.set(null);
+      var lanternRefTwo = firebase.database().ref('publicLanternList/' + that.lanternID);
+      lanternRefTwo.set(null);
+      that.deleteRefThree();
       that.update();
-  }}
+  };}
 
 
 
@@ -143,6 +164,7 @@
       margin-right: 17px;
       flex-grow: 2;
       min-width: 312px;
+      color: #65c6c5;
     }
 
     .item3 {
@@ -156,6 +178,21 @@
       background:#C9C9C9;
       border-radius: 10px;
       border: none;
+    }
+
+    .circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      color: #E0E0E0;
+      line-height: 20px;
+      text-align: center;
+      background: #FD5800;
+      font-family: work sans;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      font-size: 18px;
+      padding-top: 8px;
     }
 
 

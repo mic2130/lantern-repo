@@ -12,14 +12,9 @@
         var that = this;
         this.user = firebase.auth().currentUser;
         var database = firebase.database() //shortcut to the firebase
-        console.log("i'm here");
-        //
-        this.leftVal = Math.floor(Math.random() * 50 + 40);
-        this.bottomVal = 40;
         this.showDetails = function () {
             var openRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/listShown');
             openRef.set(true);
-            console.log("this.showDetails");
         };
 
         // get steps array from FB
@@ -36,16 +31,12 @@
                 stepsArray.push(data[key]);
             }
             that.allSteps = stepsArray.length;
-            console.log("all steps:", that.allSteps);
-
             var doneSteps = stepsArray.filter(function (x) {
                 return x.done;
             })
             that.stepsDone = doneSteps.length;
-            console.log("done steps:", that.stepsDone);
             that.decimal = that.stepsDone / that.allSteps;
             that.bottomVal = that.decimal * 100;
-            console.log("bottom Val =", that.bottomVal);
         });
 
     </script>

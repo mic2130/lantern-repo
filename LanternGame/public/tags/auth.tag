@@ -50,10 +50,6 @@
             that.update;
         }
 
-        this.on('update', function (event) {
-            console.log('auth.tag upadte');
-        });
-
         goToSocial(event) {
             this.showSocial = true;
         }

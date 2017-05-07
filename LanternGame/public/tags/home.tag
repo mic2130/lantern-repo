@@ -45,21 +45,19 @@
         });
 
         this.cancelCreateLantern = function () {
-          //  this.profileHome=true;
-          //  this.setGoal=false;
-          //  this.setDeadline=false;
-          //  this.setSteps=false;
-          //  this.setFirstDeadline=false;
-          //  this.refs.goal.value="";
-          //  this.refs.deadline.value="yyyy-MM-dd";
-          //  this.refs.firstStepDeadline.value="yyyy-MM-dd";
-          //  this.stepObjects = [{}, {}, {}];
-           console.log(this);
+          if (that.tags.userprofile.profileHome === false) {
+            that.tags.userprofile.profileHome = true;
+          };
+          that.tags.userprofile.setGoal=false;
+          that.tags.userprofile.setDeadline = false;
+          that.tags.userprofile.setSteps = false;
+          that.tags.userprofile.setFirstDeadline = false;
+          that.tags.userprofile.refs.goal.value="";
+          that.tags.userprofile.refs.deadline.value = "yyyy-MM-dd";
+          that.tags.userprofile.refs.firstStepDeadline.value="yyyy-MM-dd";
+          that.tags.userprofile.stepObjects = [{}, {}, {}];
         }
 
-        // this.donePercent = 0; this.donePercent = numDone / this.tasks.length;
-        //
-        // this.lanternSteps = []; var database = firebase.database(); this.lanterListSteps = database.ref(LanternList/key/steps);
     </script>
 
     <style>

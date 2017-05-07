@@ -9,7 +9,6 @@
     </div>
 
     <script>
-        console.log("private-social-lantern-icon.tag");
         this.leftVal = Math.floor(Math.random() * 90);
         this.bottomVal = Math.floor(Math.random() * 70);
         // this.leftVal = Math.floor(Math.random() * 50 + 40);; this.bottomVal = 15; this.tasks = [{}, {}, {}, {}, {}]; this.showSidebar = function () {     parent.sidebarShown = true;     console.log("sidebar show called"); }

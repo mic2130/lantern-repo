@@ -21,7 +21,6 @@ publicLanternListRef.on('value', function (snapshot) {
         lanternsArray.push(data[key]);
     }
     that.publicLanternList = lanternsArray;
-    console.log('this.publicLanternList', that.publicLanternList);
     that.update();
 });
 </script>

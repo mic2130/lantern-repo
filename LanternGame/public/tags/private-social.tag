@@ -32,7 +32,6 @@
         lanternsArray.push(data[key]);
     }
     that.userPublicLanternList = lanternsArray;
-    console.log('this.userPublicLanternListRef', that.userPublicLanternListRef);
     that.update();
   });
 

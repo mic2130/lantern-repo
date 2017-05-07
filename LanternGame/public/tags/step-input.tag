@@ -7,14 +7,10 @@
   <script>
     var that = this;
 
-    console.log(this);
-
     // var data;
 
     makeData(event) {
-      console.log(event.item);
       event.item.step = this.refs.stepInput.value;
-      console.log(this.parent.stepObjects);
       // that.parent.saveSteps();
     }
 
