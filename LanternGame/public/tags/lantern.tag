@@ -15,6 +15,7 @@
     <p class="circle">{ daysLeft }<br>DAYS</p>
     <p style="font-weight:600;">Steps:</p>
     <step each={ step, i in steps }></step>
+    <p>{ dL }</p>
     <p style="font-weight:600;">Deadline: <span>{ deadline }</span></p>
     <button type="button" onclick={ deleteLantern }>Delete Lantern</button>
   </div>
@@ -27,6 +28,31 @@
   var that = this;
   var daysLeft;
   this.user=firebase.auth().currentUser;
+
+  // var stepDeadlineFB;
+  // var stepDeadline;
+  //
+  // var stepDLRef = firebase.database().ref('userLanternList/' + this.userID + '/' + this.lanternID + '/' + 'nextStep');
+  //
+  //
+  // nextFunction() {
+  //   var stepDeadlineFBString = that.stepDeadlineFB.toString();
+  //   console.log("string?", this.stepDeadlineFBString);
+  // }
+  //
+  // stepDLRef.on('value', function(snapshot) {
+  //   that.stepDeadlineFB = snapshot.val();
+  //   // that.nextFunction();
+  //   var stepDeadlineFBString = this.stepDeadlineFB.toString();
+  //   console.log("string?", this.stepDeadlineFBString);
+  //   var stepDeadlineMill = ((Date.parse(this.stepDeadlineFB)) + 86400000);
+  //   console.log(this.stepDeadlineMill);
+  //   that.stepDeadline = new Date(this.stepDeadlineMill);
+  //   // that.stepDeadline = stepDeadlineFB;
+  //   that.update();
+  //   console.log("called", that.stepDeadline);
+  // })
+
 
   var deadlineRef = firebase.database().ref('userLanternList/' + this.userID + '/' + this.lanternID + '/deadline');
   var deadline;
@@ -75,16 +101,14 @@
       that.update();
   };}
 
-
-
   </script>
 
 
   <style>
-  :scope{
-    overflow:hidden;
 
-  }
+    :scope{
+      overflow: hidden;
+    }
 
     h2 {
       font-family: work sans;

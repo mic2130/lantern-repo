@@ -147,7 +147,7 @@
         newLantern.done = false;
         newLantern.deadline = that.refs.deadline.value;
         newLantern.steps = that.stepObjects;
-        newLantern.nextStep = that.refs.firstStepDeadline.value;
+        newLantern.steps[0].DL = that.refs.firstStepDeadline.value;
         newLantern.listShown=false;
         newLantern.userID=this.user.uid;
         var database = firebase.database() //shortcut to the firebase
