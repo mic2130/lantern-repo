@@ -2,7 +2,8 @@
 
     <div class="lanternDiv">
         <div class="x" onclick={ parent.showSidebar } style="bottom:{ bottomVal }%; transition: bottom 1s;">
-            <img onclick={ showDetails } src="../img/tr.png" class="lantern">
+            <img show={!congrat} onclick={ showDetails } src="../img/tr.png" class="lantern">
+            <img class="lanternTwo" show={ congrat } src="../img/deco.png">
         </div>
     </div>
 
@@ -20,6 +21,7 @@
             openRef.set(true);
             console.log("this.showDetails");
         };
+
 
         // get steps array from FB
         var stepsRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/steps');
@@ -90,8 +92,6 @@
             align-self: flex-end;
         }
 
-
-
         @-webkit-keyframes lantern {
             0% {
                 background: url("../img/lanternA.png");
@@ -107,13 +107,16 @@
             }
         }
 
-
-
         .lanternDiv {
             display: flex;
             align-items: flex-end;
             min-height: 100%;
             position: relative;
+        }
+        .lanternTwo {
+          /*margin-top: 50%;*/
+          margin-bottom: -65px;
+          max-width: 110px;
         }
 
         /*COLORS:

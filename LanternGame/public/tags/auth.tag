@@ -1,8 +1,8 @@
 <auth>
     <div class="buttons">
         <button if={ !user } onClick={ logIn }>Log In</button>
-        <button if={ user } onClick={ logOut }>Log Out</button>
         <button if={ user } show={!showSocial} onClick={ goToSocial }>See Others Lantern</button>
+        <button if={ user } onClick={ logOut }>Log Out</button>
         <button if={ user } show={showSocial} onClick={ goToPrivate }>Back to Private</button>
     </div>
     <public-social if={!user}></public-social>
@@ -92,7 +92,7 @@
           font-family: work sans;
           font-weight: 500;
           color: #2C3440;
-          background: #3AC8C6;
+          background: #23A59F;
           border-radius: 18px;
           border: none;
           margin-top: 3px;
@@ -107,7 +107,7 @@
           font-family: work sans;
           font-weight: 500;
           color: #2C3440;
-          background: #23A59F;
+          background: #3AC8C6;
           border-radius: 18px;
           border: none;
           padding-left: 13px;
