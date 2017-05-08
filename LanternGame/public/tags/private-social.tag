@@ -4,10 +4,6 @@
     <div style="col-sm-6">
       <private-social-lantern-icon each={ userPublicLanternList }></private-social-lantern-icon>
     </div>
-    <%-- <div style="width:50%; float:right">
-      <lantern-icon each={ personalLanternList }></lantern-icon>
-
-    </div> --%>
   </div>
   </div>
 

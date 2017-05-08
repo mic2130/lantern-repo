@@ -14,12 +14,13 @@
 
     <script>
         var that = this;
-        this.introduction = true;
         this.publicLanternList = [];
+        this.introduction=true;
+        hideIntroduction(){
+          this.introduction=false;
 
-        hideIntroduction = function (){
-            this.introduction = false;
         }
+
 
 
         var database = firebase.database() //shortcut to the firebase
