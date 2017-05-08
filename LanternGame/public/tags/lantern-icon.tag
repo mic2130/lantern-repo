@@ -4,7 +4,6 @@
         <div class="x" onclick={ parent.showSidebar } style="bottom:{ bottomVal }%; transition: bottom 1s;">
             <img onclick={ showDetails } src="../img/tr.png" class="lantern">
         </div>
-
     </div>
 
 
@@ -90,6 +89,9 @@
             margin: auto;
             align-self: flex-end;
         }
+
+
+
         @-webkit-keyframes lantern {
             0% {
                 background: url("../img/lanternA.png");
@@ -104,6 +106,8 @@
                 background: url("../img/lanternB.png");
             }
         }
+
+
 
         .lanternDiv {
             display: flex;

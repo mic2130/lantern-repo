@@ -3,10 +3,10 @@
     <div class="container2">
         <img class="lanternIcon item1" src="img/lanternicon.png" alt="lantern icon">
         <!-- <img class="stateIcon" src="img/notdone.png" alt="state icon" onclick={ showDetails }> -->
-        <p class="item2" onclick={ showDetails }>{ goal }
+        <p class="item2" onclick={ showDetails }>{ goal }</p>
             <br>
-            <span>{0 |daysLeft} days left</span>
-        </p>
+        <img class="progressImg" show={congrat} src="../img/done.png">
+        <img class="progressImg" show={!congrat} src="../img/notdone.png">
         <span class="glyphicon glyphicon-collapse-down item3" onclick={ showDetails } show={ !listShown }></span>
         <span class="glyphicon glyphicon-collapse-up item3" show={ listShown } onclick={ hideDetails }></span>
     </div>
@@ -14,12 +14,30 @@
         <div show={ lanternDetail}>
             <br>
             <p style="font-weight:600;">Steps:</p>
-            <step each={ step, i in steps }></step>
-            <p style="font-weight:600;">Deadline:
-                <span>{ deadline }</span>
-            </p>
-            <button type="button" onclick={ deleteLantern }>Delete Lantern</button>
+            <hr class="line3">
+          <div><step each={ step, i in steps }></step></div>
+          <div show={!congrat}>
+            <table>
+              <tr>
+                <th>
+                  <p class="circle">{ daysLeft } days left</p>
+                </th>
+                <th>
+                  <p style="font-weight:500; display: inline;">Deadline:
+                      <span style="font-weight:200;">{ deadline }</span>
+                  </p>
+                </th>
+              </tr>
+            </table>
+          </div>
+
         </div>
+        <div show={congrat} class="congrat">
+            <p class="message">Congratulations for completing your goal!</p>
+            <!-- <img style="width:20%" src="../img/girllantern.png" id="girl"> -->
+        </div>
+        <!-- <button type="button" onclick={ deleteLantern }>Delete Lantern</button> -->
+        <span class="glyphicon glyphicon-trash" style="margin-top: 7px; margin-left: 370px;" onclick={ deleteLantern}></span>
     </div>
     <div show={ setNextDeadline} class="setNext">
         <p>
@@ -28,10 +46,7 @@
         <button type="button" name="button" onclick={ completeNextStep }>Go Go Go!</button>
     </div>
 
-    <div show={congrat} class="congrat">
-        <h4>Congratulations on your progress!</h4>
-        <img style="width:20%" src="../img/girllantern.png" id="girl">
-    </div>
+
 
     <hr class="line2">
 
@@ -104,6 +119,7 @@
     }
 
     updateSteps() {
+      console.log("updatesteps called");
         var stepsRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/steps');
         var step = event.item.step;
         step.done = !step.done;
@@ -149,13 +165,14 @@
     }
     .congrat {
         text-align: center;
+        margin-top: 20px;
     }
     .setNext {
         text-align: center;
         background-color: rgba(0, 0,0, 0.1);
     }
     .item2 span {
-        font-size: 1.2vw;
+        font-size: 1.8vw;
     }
     h2 {
         font-family: work sans;
@@ -172,10 +189,11 @@
     p,
     span {
         font-family: work sans;
-        font-weight: 300;
+        font-weight: 350;
         color: #C9C9C9;
         letter-spacing: 0.5px;
-        font-size: 18px;
+        font-size: 16px;
+        margin-top: 0px;
     }
 
     hr.line1 {
@@ -183,7 +201,7 @@
     }
 
     hr.line2 {
-        border-top: 0.5px solid #2C3440;
+        border-top: 2px solid #495362;
     }
 
     button.basic {
@@ -215,6 +233,10 @@
         font-size: 20px;
         color: #C9C9C9;
     }
+    .glyphicon:hover {
+      font-size: 20px;
+      color: #7A7A7A;
+    }
 
     .container2 {
         display: flex;
@@ -235,7 +257,7 @@
         margin-left: 17px;
         margin-right: 17px;
         flex-grow: 2;
-        min-width: 312px;
+        min-width: 295px;
         color: #65c6c5;
     }
 
@@ -272,18 +294,36 @@
     }
 
     .circle {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        color: #E0E0E0;
-        line-height: 20px;
-        text-align: center;
-        background: #FD5800;
+        width: 190px;
+        height: 30px;
+        /*border-radius: 50%;*/
+        color: #FD5800;
         font-family: work sans;
         font-weight: 400;
         letter-spacing: 0.5px;
         font-size: 18px;
         padding-top: 8px;
+        margin-left: 25px;
+    }
+
+    .progressImg {
+      max-height: 23px;
+      margin-right: 10px;
+    }
+    .line3 {
+			border-top: 0.5px solid #C9C9C9;
+			margin: 3px;
+		}
+
+    .message {
+      color: #485860;
+      font-family: work sans;
+      background-color: #3AC8C6;
+      font-weight: 500;
+      font-size: 22px;
+      text-align: center;
+      max-width: 375px;
+      padding: 15px;
     }
 
 </style>

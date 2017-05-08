@@ -1,11 +1,11 @@
 <home>
 
 
-    <span class="glyphicon glyphicon-menu-hamburger" style="color: #C9C9C9;" onclick={ showSidebar }></span>
+    <span class="glyphicon glyphicon-menu-hamburger" onclick={ showSidebar }></span>
 
     <div show={ sidebarShown } class="sidebar">
         <div onclick={ cancelCreateLantern }>
-            <span class="glyphicon glyphicon-remove" style="color: #C9C9C9;" onclick={ hideSidebar }></span>
+            <span class="glyphicon glyphicon-remove" onclick={ hideSidebar }></span>
         </div>
         <userprofile lanterns={ lanternList }></userprofile>
     </div>
@@ -98,6 +98,11 @@
             right: 25px;
             margin-top: 25px;
             font-size: 22px;
+            color: #C9C9C9;
+        }
+        .glyphicon-remove:hover {
+          font-size: 22px;
+          color: #7A7A7A;
         }
 
         .glyphicon-menu-hamburger {
@@ -105,6 +110,14 @@
             top: 30px;
             left: 25px;
             font-size: 32px;
+            color: #C9C9C9;
+        }
+        .glyphicon-menu-hamburger:hover {
+            position: absolute;
+            top: 32px;
+            left: 25px;
+            font-size: 30px;
+            color: #7A7A7A;
         }
         .container {
             display: flex;

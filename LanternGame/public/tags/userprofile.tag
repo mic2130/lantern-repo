@@ -5,18 +5,18 @@
   <div show={profileHome} id="profileHome">
       <div class="userProfileSection">
 
-        <h2>  <img style="width:20%" src={ user.photoURL }/> <strong> &nbspHello,&nbsp</strong>{user.displayName}</h2>
-          <hr class="line1">
+        <h2>  <img style="width:20%; border-radius: 50%" src={ user.photoURL }/> {user.displayName}</h2>
+          <hr class="line2">
       </div>
 
 
       <div>
           <h4>Lanterns</h4>
-          <hr class="line2">
+          <hr class="line1">
 
           <!--TAG lantern here-->
           <lantern each={ lanternList }></lantern>
-          <button class="basic" type="button" name="createLanternButton" onclick={ createLantern }>Create a new lantern</button>
+          <button type="button" name="createLanternButton" onclick={ createLantern }>Create a new lantern</button>
 
       </div>
       </div>
@@ -245,24 +245,30 @@
       font-weight: 500;
       color: #2C3440;
       background: #C9C9C9;
-      border-radius: 10px;
+      border-radius: 18px;
       border: none;
-      padding-left: 10px;
-      padding-right: 10px;
+      padding-left: 13px;
+      padding-right: 13px;
+      padding-top: 8px;
+      padding-bottom: 8px;
       font-size: 15px;
     }
 
-    button.basic:hover {
+    button:hover {
       font-family: work sans;
-      font-weight: 400;
+      font-weight: 500;
       color: #2C3440;
-      background: #2C3440;
-      border-radius: 10px;
+      background: #7A7A7A;
+      border-radius: 18px;
       border: none;
-      padding: 3px;
-      padding-left: 10px;
-      padding-right: 10px;
+      padding-left: 13px;
+      padding-right: 13px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      font-size: 15px;
     }
+
+
 
     .plusBtn {
       max-width: 30px;
@@ -273,6 +279,7 @@
     .nextBtn {
       margin-left: 250px;
     }
+
 
     .hide {
       display: none;

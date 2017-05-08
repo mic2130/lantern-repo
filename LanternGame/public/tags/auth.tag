@@ -1,9 +1,9 @@
 <auth>
     <div class="buttons">
-        <button if={ !user } class="btn btn-warning" onClick={ logIn }>Log In</button>
-        <button if={ user } class="btn btn-success" onClick={ logOut }>Log Out</button>
-        <button if={ user } show={!showSocial} class="btn btn-info" onClick={ goToSocial }>See Others Lantern</button>
-        <button if={ user } show={showSocial} class="btn btn-info" onClick={ goToPrivate }>Back to Private</button>
+        <button if={ !user } onClick={ logIn }>Log In</button>
+        <button if={ user } onClick={ logOut }>Log Out</button>
+        <button if={ user } show={!showSocial} onClick={ goToSocial }>See Others Lantern</button>
+        <button if={ user } show={showSocial} onClick={ goToPrivate }>Back to Private</button>
     </div>
     <public-social if={!user}></public-social>
     <home if={user} show={!showSocial}></home>
@@ -80,13 +80,42 @@
             margin-right: 2vw;
             margin-top: 2vh;
         }
-        .buttons{
+
+        .buttons {
           position:fixed;
           top:1%;
           right:1%;
           z-index: 99;
-            }
+        }
 
+        button {
+          font-family: work sans;
+          font-weight: 500;
+          color: #2C3440;
+          background: #3AC8C6;
+          border-radius: 18px;
+          border: none;
+          margin-top: 3px;
+          padding-left: 13px;
+          padding-right: 13px;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          font-size: 12px;
+        }
+
+        button:hover {
+          font-family: work sans;
+          font-weight: 500;
+          color: #2C3440;
+          background: #23A59F;
+          border-radius: 18px;
+          border: none;
+          padding-left: 13px;
+          padding-right: 13px;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          font-size: 12px;
+        }
     </style>
 
 </auth>

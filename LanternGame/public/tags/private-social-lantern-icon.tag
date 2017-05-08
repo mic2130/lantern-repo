@@ -53,7 +53,7 @@
             background-size: 100% 100%;
             background-repeat: no-repeat;
             color: white;
-            font-size:0.1vw;
+            font-size:1vw;
             text-align: center;
             border-radius: 6px;
             position: fixed;
