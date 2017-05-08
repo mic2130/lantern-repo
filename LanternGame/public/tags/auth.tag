@@ -100,7 +100,7 @@
           padding-right: 13px;
           padding-top: 8px;
           padding-bottom: 8px;
-          font-size: 12px;
+          font-size: 15px;
         }
 
         button:hover {
@@ -114,7 +114,7 @@
           padding-right: 13px;
           padding-top: 8px;
           padding-bottom: 8px;
-          font-size: 12px;
+          font-size: 15px;
         }
     </style>
 

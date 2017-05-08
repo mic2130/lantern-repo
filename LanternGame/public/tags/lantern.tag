@@ -134,8 +134,6 @@
         }else if (that.number = that.allSteps) {
             var openCon = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/congrat');
             openCon.set(true);
-            var openRef = firebase.database().ref('userLanternList/' + this.user.uid + "/" + this.lanternID + '/listShown');
-            openRef.set(false);
         }
     }
 

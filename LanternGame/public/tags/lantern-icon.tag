@@ -115,7 +115,7 @@
         }
         .lanternTwo {
           /*margin-top: 50%;*/
-          margin-bottom: -65px;
+          /*margin-bottom: -65px;*/
           max-width: 110px;
         }
 

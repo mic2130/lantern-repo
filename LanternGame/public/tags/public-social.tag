@@ -41,11 +41,11 @@
         .lalabg {
             position:absolute;
             color: #C9C9C9;
-            margin-left:20%;
+            margin-left:25%;
             /*margin-right:25%;*/
             margin-top:10%;
-            background-color:rgba(0, 0,0, 0.6);
-            width: 60%;
+            background-color:rgba(36, 45,57, 0.7);
+            width: 50%;
             height: auto;
             padding: 40px;
             z-index: 3;
@@ -55,7 +55,7 @@
         h1 {
             font-family: 'Lobster Two', cursive;
             font-weight: 500;
-            font-size: 40px;
+            font-size: 4vw;
             margin-bottom: 30px;
         }
 
@@ -63,12 +63,12 @@
             font-family: "Raleway", sans-serif;
             line-height: 180%;
             padding-top: 5px;
-            font-size: 15px;
+            font-size: 1.5vw;
             /*font-weight: 300;*/
         }
 
         h3 {
-          font-size: 20px;
+          font-size: 1.6vw;
         }
 
         .glyphicon-remove {

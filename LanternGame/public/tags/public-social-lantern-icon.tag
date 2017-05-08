@@ -47,21 +47,21 @@
         }
     }
     .lantern:hover .tooltiptext {
-        visibility: visible;
-        width:6vw;
-        height:50vh;
-        background: url("../img/shiningLight.png");
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        color: white;
-        font-size:1vw;
-        text-align: center;
-        border-radius: 6px;
-        position: fixed;
-        display: block;
-        margin: 2.5vw;
-        margin-top:20vh;
-        z-index: 1;
+      visibility: visible;
+                width:4vw;
+                height:50vh;
+                background: url("./img/shiningLight.png");
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                color: white;
+                font-size:0.6vw;
+                text-align: center;
+                border-radius: 6px;
+                position: fixed;
+                display: block;
+                margin: 1vw;
+                margin-top:10vh;
+                z-index: 1;
     }
     .lantern .tooltiptext {
         visibility: hidden;
