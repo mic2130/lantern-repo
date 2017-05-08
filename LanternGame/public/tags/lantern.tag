@@ -41,7 +41,7 @@
     </div>
     <div show={ setNextDeadline} class="setNext">
         <p>
-            <strong>Great Job!</strong><br>When do you want to complete your next step by?</p>
+            Great Job!<br>When do you want to complete your next step by?</p>
         <input style="margin-bottom: 10px; margin-top:5px;" ref="nextStepDeadline" type="date" name="nextStepDeadline" value="yyyy-MM-dd">
         <button type="button" name="button" onclick={ completeNextStep }>Go Go Go!</button>
     </div>
@@ -170,6 +170,8 @@
     .setNext {
         text-align: center;
         background-color: rgba(0, 0,0, 0.1);
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
     .item2 span {
         font-size: 1.8vw;
