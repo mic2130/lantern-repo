@@ -41,9 +41,9 @@
     </div>
     <div show={ setNextDeadline} class="setNext">
         <p>
-            Great Job!<br>When do you want to complete your next step by?</p>
-        <input style="margin-bottom: 10px; margin-top:5px;" ref="nextStepDeadline" type="date" name="nextStepDeadline" value="yyyy-MM-dd">
-        <button type="button" name="button" onclick={ completeNextStep }>Go Go Go!</button>
+            GREAT JOB! When do you want<br>to complete your next step by?</p>
+        <input style="margin-bottom: 10px; margin-top:5px; margin-left: 0px; margin-right: 10px; max-width: 250px;" ref="nextStepDeadline" type="date" name="nextStepDeadline" value="yyyy-MM-dd">
+        <button type="button" name="button" onclick={ completeNextStep }>Go!</button>
     </div>
 
 
@@ -168,10 +168,15 @@
         margin-top: 20px;
     }
     .setNext {
-        text-align: center;
+        /*text-align: center;*/
         background-color: rgba(0, 0,0, 0.1);
         padding-top: 15px;
         padding-bottom: 15px;
+        padding-left: 35px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 6px;
+        font-weight: 250;
     }
     .item2 span {
         font-size: 1.8vw;
